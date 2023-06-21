@@ -1,21 +1,15 @@
 def get_deductible_amount(donation, income):
     """Return the tax-deductible amount from a donation"""
     income_tax = get_income_tax(income)
-    deductibility_cap = 0.20 * income
-    deductibility_rate = 0.66
+    deduction_cap = 0.20 * income
+    deduction_rate = 0.66
     
-    if donation <= deductibility_cap and donation <= income_tax:
+    if donation <= deduction_cap and donation <= income_tax:
         eligible_amount = donation
-    elif donation > deductibility_cap and donation <= income_tax:
-        eligible_amount = deductibility_cap
-    elif donation <= deductibility_cap and donation > income_tax:
-        eligible_amount = income_tax
-    elif donation > deductibility_cap and donation > income_tax:
-        eligible_amount = min(income_tax, deductibility_cap)
     else:
-        raise ValueError("Deductible amount could not be computed.")
+        eligible_amount = min(income_tax, deduction_cap)
         
-    deductible_amount = eligible_amount * deductibility_rate
+    deductible_amount = eligible_amount * deduction_rate
     return deductible_amount
 
 
