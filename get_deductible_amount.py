@@ -1,5 +1,14 @@
 def get_deductible_amount(donation, income):
-    """Return the tax-deductible amount from a donation"""
+    """Return the tax-deductible amount from a donation
+    
+    In France, donations below 20% of income are 66% tax-deductible.
+    That means that the eligible amount is the whole donation if it is
+    below the 20% cap, and just 20% of income otherwise.
+    The actual deductible amount is 66% of the deductible amount, except
+    if that value is lower than the income tax payed: you can't deduct
+    more than what you pay. In that case, the deductible amount is equal
+    to the income tax payed.
+    """
     income_tax = get_income_tax(income)
     eligibility_cap = 0.20 * income
     deduction_rate = 0.66
