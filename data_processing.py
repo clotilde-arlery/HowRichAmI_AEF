@@ -1,7 +1,7 @@
 import json
 
-chemin = "D:\Assos\AltruismeEfficace\HRAI\data_brut.json"
-chemin_export = "D:\Assos\AltruismeEfficace\HRAI\data_processed.json"
+chemin = "votre chemin vers les données"
+chemin_export = "votre chemin pour les nouvelles données"
 
 income_distrib = []
 
