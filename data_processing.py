@@ -1,7 +1,7 @@
 import json
 
 chemin = "votre chemin vers les données"
-chemin_export = "votre chemin pour les nouvelles données"
+chemin_export = "votre chemin l'export des données formatées"
 
 income_distrib = []
 
