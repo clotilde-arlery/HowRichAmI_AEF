@@ -128,7 +128,7 @@
         </section>
         <section class="donner">
 
-            <h2 class="subject">En donnant <span id="txt_donInit" class="important_txt">23%</span> de vos revenus, <br>soit <span id="txt_donReal" class="don_real">10%</span> après déduction fiscale<a href="#note2" class="footNote">2</a>...</h2>
+            <h2 class="subject">En donnant <span id="txt_donInit" class="important_txt">23%</span> de vos revenus, <br>soit <span id="txt_donReal" class="don_real">10%</span> après réduction d'impôts<a href="#note2" class="footNote">2</a>...</h2>
             
             <div id="range_input" class="range_input">
                 <input type="range" name="rangeInit" id="doubleRangeInit" min="1" max="50" value="10" step="1">
@@ -162,7 +162,7 @@
                 </div>
             </div>
             <h2 class="subject">...et chaque année, vos <span id="txt_amountDon" class="important_txt">11 136 €</span> de dons<br>
-                (ou <span id="txt_amountDonDefisc" class="don_real">4 800 €</span> après déduction fiscale)<br>
+                (ou <span id="txt_amountDonDefisc" class="don_real">4 800 €</span> après réduction d'impôts)<br>
                 pourraient :</h2>
             <div class="container_conseqDon">
                 <div class="conseqDon">
@@ -233,7 +233,7 @@
                             <p>Par exemple, pour un ménage composé de 2 adultes et 1 enfant, votre revenu est divisé par 1,8 avant d’être comparé à la distribution mondiale des revenus. Ce calcul standard permet de tenir compte des économies d’échelle au sein du ménage.</p>
                             <br>
                         </li>
-                        <li id="note2">Certaines associations permettent de déduire une partie des dons de vos impôts sur le revenu. En France, cette déduction est de 66% du don, tant qu’il représente moins de 20% de votre revenu. Par ailleurs, vous ne pouvez pas déduire plus que 100% de vos impôts. Notre calculateur estime votre niveau d’impôts pour tenir compte de cette limite.</li>
+                        <li id="note2">Certaines associations permettent de déduire une partie des dons de vos impôts sur le revenu. En France, cette réduction est de 66% du don, tant qu’il représente moins de 20% de votre revenu. Par ailleurs, vous ne pouvez pas déduire plus que 100% de vos impôts. Notre calculateur estime votre niveau d’impôts pour tenir compte de cette limite.</li>
                         <br><li id="note3">Cf <a href="https://docs.google.com/spreadsheets/d/1tytvmV_32H8XGGRJlUzRDTKTHrdevPIYmb_uc6aLeas/edit">GiveWell Cost Analysis (2022), section AMF</a></li>
                         <br><li id="note4">ACE ne donne pas d’estimation précise, parce qu’il y a trop d’incertitude, en revanche, <a href="https://www.founderspledge.com/downloads/fp-animal-welfare">Ce rapport de Founder’s pledge</a> donne l’ordre de grandeur de 10 années de vie de poule hors cage par dollar</li>
                         <br><li id="note5">Selon <a href="https://www.givinggreen.earth/top-climate-change-nonprofit-donations-recommendations">Giving Green</a>, l'ordre de grandeur est de 10$ par tonne de CO2(eq) (pour Evergreen et GFI), soit 9 € / tCO2(eq). <br>Par ailleurs, selon le <a href="https://www.statistiques.developpement-durable.gouv.fr/edition-numerique/chiffres-cles-du-climat-2022/donnees-cles">Ministère de la transition écologique</a>(2019) un.e français.e émet en moyenne 4,8 tonnes de CO2 (tCO2 / hab / an)</li><br>
@@ -248,14 +248,14 @@
                     La méthodologie de la distribution mondiale des revenus obtenue par WID est disponible <a href="https://wid.world/how-does-our-income-comparator-work/">ici</a>. La parité de pouvoir d'achat et l'inflation, entre autre choses, sont prises en compte dans l'élaboration de cette distribution des revenus.
                     <br>
                     <br>
-                    Pour déterminer le montant de don éligible à la déduction fiscale propre au système français, nous calculons une estimation des impôts payés sur la base de votre salaire et du nombre d'adultes/enfants du ménage, ici, non pas avec l'échelle d'équivalence de l'OCDE mais, conformément au processus d'imposition, avec le quotient familial. En particulier, le quotient familial est calculé comme décrit <a href="https://www.economie.gouv.fr/particuliers/quotient-familial">ici</a> et les impôts sont calculés conformément au barème de l'impôt sur le revenu en suivant <a href="https://www.economie.gouv.fr/particuliers/tranches-imposition-impot-revenu">cette méthodologie</a>.
+                    Pour déterminer le montant de don éligible à la réduction d'impôts propre au système français, nous calculons une estimation des impôts payés sur la base de votre salaire et du nombre d'adultes/enfants du ménage, ici, non pas avec l'échelle d'équivalence de l'OCDE mais, conformément au processus d'imposition, avec le quotient familial. En particulier, le quotient familial est calculé comme décrit <a href="https://www.economie.gouv.fr/particuliers/quotient-familial">ici</a> et les impôts sont calculés conformément au barème de l'impôt sur le revenu en suivant <a href="https://www.economie.gouv.fr/particuliers/tranches-imposition-impot-revenu">cette méthodologie</a>.
                     <br>
                     <br>
                     En France, les dons peuvent être défiscalisés à hauteur de 66% dans la limite des 20% revenu imposable. Si votre don est supérieur à 20% du votre revenu imposable, on fixe un premier montant déductible de <code>66% x 20% x votre revenu</code>, sinon, ce premier montant déductible est fixé à <code>66% x le montant de votre don</code>. Cependant, la défiscalisation des dons est déduite sur vos impôts, donc dans la limite du montant de vos impôts. Pour déterminer le montant réellement déductible, il faut donc s'assurer que celui-ci soit strictement inférieur au montant des impôts à payer. Dans le cas contraire (premier montant déductible supérieur ou égal à vos impôts), le montant réellement déductible in fine sera le montant de vos impôts. 
                     <br>
                     <span style="font-style:italic;">Autrement dit, si le premier montant déductible est supérieur ou égal au montant d'impôts que vous payez, vous ne paierez plus d'impôts.</span>
                     <br>
-                    Une fois le montant réellement déductible déterminé, on le soustrait à votre don inial pour obtenir le montant que vous allez vraiment sortir de votre poche (bien que la déduction fiscale soit donc différée et effectuées sur vos impôts).
+                    Une fois le montant réellement déductible déterminé, on le soustrait à votre don inial pour obtenir le montant que vous allez vraiment sortir de votre poche (bien que la réduction d'impôts soit donc différée et effectuées sur vos impôts).
                     <br>
                 </p>
                 <br>
