@@ -1602,7 +1602,7 @@ function getPercentile(income){
 }
 
 function App(){
-    let nb_menage, percentile, pourcentage_position, timesRevenuMedian, ajusted_income;
+    let equivalent_size, percentile, pourcentage_position, timesRevenuMedian, ajusted_income;
     let txt_revenu = document.getElementById('txt_revenu');
     let txt_nbMenage = document.getElementById('txt_nbMenage');
     let txt_pourcentagePosition = document.getElementById('txt_pourcentagePosition');
@@ -1620,18 +1620,18 @@ function App(){
         }
         //console.log(income);
         
+        n_adults = Number(nb_adult.value);
+        n_children = Number(nb_children.value);
+        txt_nbMenage.innerHTML = n_adults + n_children;
+
+        if (n_adults == 1){
+            equivalent_size = n_adults + 0.3 * n_children;
+        }
+        else if (n_adults > 1){
+            equivalent_size = (n_adults - 1) * 0.5 + 1 + 0.3 * (n_children);
+        }
+        ajusted_income = income / equivalent_size;
         
-        //txt_nbMenage.innerHTML = Number(nb_adult.value) + Number(nb_children.value);
-        if (Number(nb_adult.value) == 1){
-            nb_menage = Number(nb_adult.value) + 0.3*(Number(nb_children.value));
-            txt_nbMenage.innerHTML = nb_menage;
-            
-        }
-        else if (Number(nb_adult.value) > 1){
-            nb_menage = (Number(nb_adult.value)-1)*0.5 + 1 + 0.3*(Number(nb_children.value));
-            txt_nbMenage.innerHTML = nb_menage;
-        }
-        ajusted_income = income/nb_menage;
         txt_revenu.innerHTML = income + '€';
         percentile = getPercentile(ajusted_income);
         //console.log(percentile);
@@ -1742,7 +1742,7 @@ function App(){
         txt_donInit.innerHTML = initSliderValue.value.toString() + "%";
         txt_donReal.innerHTML = don_defisc_percentIncome.toString() + "%";
         let incomePostDon = income - don_defisc;
-        let ajusted_incomePD = incomePostDon/nb_menage;
+        let ajusted_incomePD = incomePostDon/equivalent_size;
         let percentilePostDon = getPercentile(ajusted_incomePD);
         let positionPostDon = document.getElementById("positionPostDon");
         let pourcentage_positionPD = 100 - percentilePostDon;
