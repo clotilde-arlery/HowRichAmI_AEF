@@ -82,7 +82,16 @@
 
     <div id="containerApp">
         <section class="income_position">
-            <h2 class="subject">Avec un revenu de <span id="txt_revenu" class="important_txt">48 000 €</span> par an pour <span id="txt_nbMenage" class="important_txt">trois</span><a href="#note1" class="footNote">1</a>, <br>
+            <h2 class="subject">
+                Avec un revenu de
+                <span id="txt_revenu" class="important_txt">x€</span>
+                par an<span id="txt_pourN">
+                    pour 
+                    <span id="txt_nbMenage" class="important_txt">
+                        n
+                    </span>
+                    <a href="#note1" class="footNote">1</a>
+                </span>, <br>
                 vous êtes parmi les <span id="txt_pourcentagePosition" class="important_txt">7%</span> les plus riches du monde.</h2>
                 
                 <div id="graph_container" class="graph_container">
@@ -1609,6 +1618,7 @@ function getPercentile(income){
 
 function App(){
     let equivalent_size, percentile, pourcentage_position, timesRevenuMedian, ajusted_income;
+    let txt_pourN = document.getElementById('txt_pourN');
     let txt_revenu = document.getElementById('txt_revenu');
     let txt_nbMenage = document.getElementById('txt_nbMenage');
     let txt_pourcentagePosition = document.getElementById('txt_pourcentagePosition');
@@ -1636,7 +1646,11 @@ function App(){
         
         n_adults = Number(nb_adult.value);
         n_children = Number(nb_children.value);
-        txt_nbMenage.innerHTML = n_adults + n_children;
+        n_household = n_adults + n_children;
+        txt_nbMenage.innerHTML = n_household;
+        if (n_household == 1){
+            txt_pourN.style.display = "none";
+        }
 
         if (n_adults == 1){
             equivalent_size = n_adults + 0.3 * n_children;
