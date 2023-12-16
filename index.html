@@ -1084,7 +1084,7 @@ var mensuel_label = document.getElementById("mensuel_label");
 var income_period = document.getElementById("income_period");
 var container_dropdownperiod = document.getElementById("container_dropdownperiod");
 let initialForm = document.getElementById('initialForm');
-let launchApp = document.getElementById('calculerSituation');
+let launchButton = document.getElementById('calculerSituation');
 let containerApp = document.getElementById('containerApp');
 let income;
 let initSliderValue = document.getElementById("doubleRangeInit");
@@ -1093,6 +1093,9 @@ let range_input = document.getElementById("range_input");
 let txt_donInit = document.getElementById("txt_donInit");
 let txt_donReal = document.getElementById("txt_donReal");
 
+launchButton.addEventListener('click', App);
+initialForm.addEventListener('input', enableLaunchButton);
+initialForm.addEventListener('keydown', launchIfReturnKeyIsPressed);
 range_input.addEventListener('change', App);
 
 initSliderValue.value = 10;
@@ -1117,18 +1120,25 @@ function formValid(){
     return revenu.value != 0 && (nb_adult.value === "" || nb_adult.value != 0);
 }
 
-function enableButton(){
-    let button = document.getElementById("calculerSituation");
+function enableLaunchButton(){
     if (formValid()){
-        button.style.backgroundColor = "#00829C";
-        button.style.cursor = "pointer";
+        launchButton.style.backgroundColor = "#00829C";
+        launchButton.style.cursor = "pointer";
     }
     else{
-        button.style.backgroundColor = "#d9d9d9";
-        button.style.cursor = "default";
+        launchButton.style.backgroundColor = "#d9d9d9";
+        launchButton.style.cursor = "default";
     }
 }
-initialForm.addEventListener('input', enableButton);
+
+function launchIfReturnKeyIsPressed(key){
+    let return_key = 13;
+    let pressed_key = key.which;
+    if (pressed_key == return_key){
+        App()
+    }
+}
+
 
 if (annuel_radio.checked == true){
     income_period.innerHTML = "annuel";
@@ -1191,7 +1201,6 @@ for (i = 0; i < acc.length; i++) {
     }
   });
 } 
-launchApp.addEventListener('click', App);
 
 function getPercentile(income){
     let global_income_distrib = [
