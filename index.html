@@ -87,8 +87,10 @@
                 <span id="txt_revenu" class="important_txt">
                     x€
                 </span>
-                    par an
-                <span id="txt_pourN">
+                par 
+                <span id="txt_period">
+                    an
+                </span><span id="txt_pourN">
                     pour 
                     <span id="txt_nbMenage" class="important_txt">
                         n
@@ -1106,7 +1108,7 @@ var container_dropdownperiod = document.getElementById("container_dropdownperiod
 let initialForm = document.getElementById('initialForm');
 let launchButton = document.getElementById('calculerSituation');
 let containerApp = document.getElementById('containerApp');
-let income;
+let yearlyIncome;
 let initSliderValue = document.getElementById("doubleRangeInit");
 let realSliderValue = document.getElementById("doubleRangeReal");
 let range_input = document.getElementById("range_input");
@@ -1629,6 +1631,7 @@ function getPercentile(income){
 
 function App(){
     let equivalent_size, percentile, pourcentage_position, timesRevenuMedian, ajusted_income;
+    let txt_period = document.getElementById('txt_period');
     let txt_pourN = document.getElementById('txt_pourN');
     let txt_revenu = document.getElementById('txt_revenu');
     let txt_nbMenage = document.getElementById('txt_nbMenage');
@@ -1647,14 +1650,18 @@ function App(){
             nb_children.value = 0
         }
 
-        if (annuel_radio.checked == true){
-            income = revenu.value;
+
+        txt_revenu.innerHTML = revenu.value + '€';
+        if (annuel_radio.checked){
+            yearlyIncome = revenu.value;
+            txt_period.innerHTML = "an";
         }
         else {
-            income = revenu.value * 12;
+            yearlyIncome = revenu.value * 12;
+            txt_period.innerHTML = "mois";
         }
         //console.log(income);
-        
+
         n_adults = Number(nb_adult.value);
         n_children = Number(nb_children.value);
         n_household = n_adults + n_children;
@@ -1669,9 +1676,8 @@ function App(){
         else if (n_adults > 1){
             equivalent_size = (n_adults - 1) * 0.5 + 1 + 0.3 * (n_children);
         }
-        ajusted_income = income / equivalent_size;
+        ajusted_income = yearlyIncome / equivalent_size;
         
-        txt_revenu.innerHTML = income + '€';
         percentile = getPercentile(ajusted_income);
         //console.log(percentile);
         pourcentage_position = 100 - percentile;
@@ -1738,7 +1744,7 @@ function App(){
             }
         }
         //console.log("quotient familial : ", quotient_familial);
-        let revenu_imposable = income / quotient_familial;
+        let revenu_imposable = yearlyIncome / quotient_familial;
         let impots;
         if (revenu_imposable <= 10777){
             impots = 0;
@@ -1756,12 +1762,12 @@ function App(){
             impots = (16700*0.11 + 51091*0.3 + 90423*0.41 + (revenu_imposable - 168994)*0.45)*quotient_familial;
         }
         //console.log("impots : ", impots);
-        let egibility_cap = 0.2*income;
-        let don = (initSliderValue.value/100)*income;
+        let egibility_cap = 0.2*yearlyIncome;
+        let don = (initSliderValue.value/100)*yearlyIncome;
         console.log(don);
         let deductible_amount;
         if (don > egibility_cap){
-            deductible_amount = 0.66*0.2*income;
+            deductible_amount = 0.66*0.2*yearlyIncome;
         }
         else if (don <= egibility_cap){
             deductible_amount = 0.66*don;
@@ -1775,12 +1781,12 @@ function App(){
             don_defisc_amount = impots;
         }
         don_defisc = don - don_defisc_amount;
-        don_defisc_percentIncome = (don_defisc/income)*100;
+        don_defisc_percentIncome = (don_defisc/yearlyIncome)*100;
         don_defisc_percentIncome = Math.round(don_defisc_percentIncome*10)/10;
         realSliderValue.value = don_defisc_percentIncome;
         txt_donInit.innerHTML = initSliderValue.value.toString() + "%";
         txt_donReal.innerHTML = don_defisc_percentIncome.toString() + "%";
-        let incomePostDon = income - don_defisc;
+        let incomePostDon = yearlyIncome - don_defisc;
         let ajusted_incomePD = incomePostDon/equivalent_size;
         let percentilePostDon = getPercentile(ajusted_incomePD);
         let positionPostDon = document.getElementById("positionPostDon");
