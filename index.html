@@ -1117,7 +1117,7 @@ let txt_donReal = document.getElementById("txt_donReal");
 
 launchButton.addEventListener('click', App);
 initialForm.addEventListener('input', enableLaunchButton);
-initialForm.addEventListener('keydown', launchIfReturnKeyIsPressed);
+document.addEventListener('keydown', launchIfReturnKeyIsPressed);
 range_input.addEventListener('change', App);
 
 initSliderValue.value = 10;
