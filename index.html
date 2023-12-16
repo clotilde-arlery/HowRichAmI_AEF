@@ -28,7 +28,7 @@
     
         <h2 class="subject">Vous êtes probablement plus riche que vous ne le pensez - faites le test !</h2>
     
-        <form class="initial_form">
+        <form id="initialForm">
             <p class="invalidForm" id="invalidForm">*Veuillez remplir tous les champs</p>
             <!-- <div class="income_input_container"> -->
                 <div class="form__group">
@@ -333,7 +333,7 @@ body{
     margin-top: 60px;
     margin-bottom: 30px;
 }
-.initial_form{
+#initialForm{
     margin-top: 20px;
     width: 100%;
     display: flex;
@@ -1083,7 +1083,7 @@ var annuel_label = document.getElementById("annuel_label");
 var mensuel_label = document.getElementById("mensuel_label");
 var income_period = document.getElementById("income_period");
 var container_dropdownperiod = document.getElementById("container_dropdownperiod");
-let initialForm = document.getElementById('userSituation');
+let initialForm = document.getElementById('initialForm');
 let launchApp = document.getElementById('calculerSituation');
 let containerApp = document.getElementById('containerApp');
 let income;
@@ -1113,15 +1113,20 @@ else{
 /* End init form*/
 
 /* Form on change */
-function checkFormSitu(){
-    if (revenu.value != ''){
-        document.getElementById("calculerSituation").style.backgroundColor = "#00829C";
+function formValid(){
+    return revenu.value != '' && nb_adult.value != 0;
+}
+
+function enableButton(){
+    let button = document.getElementById("calculerSituation");
+    if (formValid()){
+        button.style.backgroundColor = "#00829C";
     }
     else{
-        document.getElementById("calculerSituation").style.backgroundColor = "#d9d9d9";
+        button.style.backgroundColor = "#d9d9d9";
     }
 }
-revenu.addEventListener('change', checkFormSitu);
+initialForm.addEventListener('input', enableButton);
 
 if (annuel_radio.checked == true){
     income_period.innerHTML = "annuel";
@@ -1609,7 +1614,7 @@ function App(){
     let individual_income_position;
     
 
-    if (revenu.value != ""){
+    if (formValid()){
         // App
         containerApp.style.display = "block";
         if (annuel_radio.checked == true){
