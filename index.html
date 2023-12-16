@@ -28,8 +28,7 @@
     
         <h2 class="subject">Vous êtes probablement plus riche que vous ne le pensez - faites le test !</h2>
     
-        <form class="initial_form">
-            <p class="invalidForm" id="invalidForm">*Veuillez remplir tous les champs</p>
+        <form id="initialForm">
             <!-- <div class="income_input_container"> -->
                 <div class="form__group">
                     
@@ -82,26 +81,48 @@
 
     <div id="containerApp">
         <section class="income_position">
-            <h2 class="subject">Avec un revenu de <span id="txt_revenu" class="important_txt">48 000 €</span> par an pour <span id="txt_nbMenage" class="important_txt">trois</span><a href="#note1" class="footNote">1</a>, <br>
-                vous êtes parmi les <span id="txt_pourcentagePosition" class="important_txt">7%</span> les plus riches du monde.</h2>
+            <h2 class="subject">
+                Avec un revenu de
+                <span id="txt_revenu" class="important_txt">
+                    x€
+                </span>
+                par 
+                <span id="txt_period">
+                    an
+                </span><span id="txt_pourN">
+                    pour 
+                    <span id="txt_nbMenage" class="important_txt">
+                        n
+                    </span>
+                    <a href="#note1" class="footNote">1</a>
+                </span>, <br>
+                vous êtes parmi les
+                <span id="txt_pourcentagePosition" class="important_txt">
+                    y%
+                </span>
+                les plus riches du monde.
+            </h2>        
+
+            <div id="graph_container" class="graph_container">
                 
-                <div id="graph_container" class="graph_container">
+                <div id="income_position_bar" class="income_position_bar">
+                    <div class="poorer_position">
+                        <span class="material-symbols-outlined poor_arrow">
+                            arrow_upward
+                        </span>
+                        <p class="txt_poorer_position">
+                            Personnes moins riches que vous
+                        </p>
+                    </div>
                     
-                    <div id="income_position_bar" class="income_position_bar">
-                        <div class="poorer_position">
-                            <span class="material-symbols-outlined poor_arrow">
-                                arrow_upward </span>
-                            <p class="txt_poorer_position">Personnes moins riches que vous</p>
-                        </div>
-                        
-                        <div class="your_position">
-                            <p class="txt_your_position">Vous</p>
-                            <span class="material-symbols-outlined your_arrow">
+                    <div class="your_position">
+                        <p class="txt_your_position">Vous</p>
+                        <span class="material-symbols-outlined your_arrow">
                             arrow_downward
-                            </span>
-                        </div>
+                        </span>
                     </div>
                 </div>
+            </div>
         </section>
         <section class="median_income">
 
@@ -333,18 +354,13 @@ body{
     margin-top: 60px;
     margin-bottom: 30px;
 }
-.initial_form{
+#initialForm{
     margin-top: 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-.invalidForm{
-    transform: translateY(-30px);
-    color: #c43d3d;
-    visibility: hidden;
 }
 .income_input_container{
     width: 100%;
@@ -1083,16 +1099,19 @@ var annuel_label = document.getElementById("annuel_label");
 var mensuel_label = document.getElementById("mensuel_label");
 var income_period = document.getElementById("income_period");
 var container_dropdownperiod = document.getElementById("container_dropdownperiod");
-let initialForm = document.getElementById('userSituation');
-let launchApp = document.getElementById('calculerSituation');
+let initialForm = document.getElementById('initialForm');
+let launchButton = document.getElementById('calculerSituation');
 let containerApp = document.getElementById('containerApp');
-let income;
+let yearlyIncome;
 let initSliderValue = document.getElementById("doubleRangeInit");
 let realSliderValue = document.getElementById("doubleRangeReal");
 let range_input = document.getElementById("range_input");
 let txt_donInit = document.getElementById("txt_donInit");
 let txt_donReal = document.getElementById("txt_donReal");
 
+launchButton.addEventListener('click', App);
+initialForm.addEventListener('input', enableLaunchButton);
+document.addEventListener('keydown', launchIfReturnKeyIsPressed);
 range_input.addEventListener('change', App);
 
 initSliderValue.value = 10;
@@ -1100,28 +1119,32 @@ initSliderValue.value = 10;
 /* Init form */
 let revenu = document.getElementById('name');
 let nb_adult = document.getElementById('nb_adult');
-nb_adult.value = 1;
 let nb_children= document.getElementById('nb_children');
-nb_children.value = 0;
-
-if (revenu.value != ""){
-    document.getElementById("calculerSituation").style.backgroundColor = "#00829C";
-}
-else{
-    document.getElementById("calculerSituation").style.backgroundColor = "#d9d9d9";
-}
-/* End init form*/
 
 /* Form on change */
-function checkFormSitu(){
-    if (revenu.value != ''){
-        document.getElementById("calculerSituation").style.backgroundColor = "#00829C";
+function formValid(){
+    return revenu.value != 0 && (nb_adult.value === "" || nb_adult.value != 0);
+}
+
+function enableLaunchButton(){
+    if (formValid()){
+        launchButton.style.backgroundColor = "#00829C";
+        launchButton.style.cursor = "pointer";
     }
     else{
-        document.getElementById("calculerSituation").style.backgroundColor = "#d9d9d9";
+        launchButton.style.backgroundColor = "#d9d9d9";
+        launchButton.style.cursor = "default";
     }
 }
-revenu.addEventListener('change', checkFormSitu);
+
+function launchIfReturnKeyIsPressed(key){
+    let return_key = 13;
+    let pressed_key = key.which;
+    if (pressed_key == return_key){
+        App()
+    }
+}
+
 
 if (annuel_radio.checked == true){
     income_period.innerHTML = "annuel";
@@ -1184,7 +1207,6 @@ for (i = 0; i < acc.length; i++) {
     }
   });
 } 
-launchApp.addEventListener('click', App);
 
 function getPercentile(income){
     let global_income_distrib = [
@@ -1602,37 +1624,54 @@ function getPercentile(income){
 }
 
 function App(){
-    let nb_menage, percentile, pourcentage_position, timesRevenuMedian, ajusted_income;
+    let equivalent_size, percentile, pourcentage_position, timesRevenuMedian, ajusted_income;
+    let txt_period = document.getElementById('txt_period');
+    let txt_pourN = document.getElementById('txt_pourN');
     let txt_revenu = document.getElementById('txt_revenu');
     let txt_nbMenage = document.getElementById('txt_nbMenage');
     let txt_pourcentagePosition = document.getElementById('txt_pourcentagePosition');
     let individual_income_position;
     
 
-    if (revenu.value != ""){
-        // App
+    if (formValid()){
         containerApp.style.display = "block";
-        if (annuel_radio.checked == true){
-            income = revenu.value;
+        
+        // Use placeholder default values if "Adultes" and "Enfants" are empty
+        if (nb_adult.value === ""){
+            nb_adult.value = 1
+        }
+        if (nb_children.value === ""){
+            nb_children.value = 0
+        }
+
+
+        txt_revenu.innerHTML = revenu.value + '€';
+        if (annuel_radio.checked){
+            yearlyIncome = revenu.value;
+            txt_period.innerHTML = "an";
         }
         else {
-            income = revenu.value * 12;
+            yearlyIncome = revenu.value * 12;
+            txt_period.innerHTML = "mois";
         }
         //console.log(income);
-        
-        
-        //txt_nbMenage.innerHTML = Number(nb_adult.value) + Number(nb_children.value);
-        if (Number(nb_adult.value) == 1){
-            nb_menage = Number(nb_adult.value) + 0.3*(Number(nb_children.value));
-            txt_nbMenage.innerHTML = nb_menage;
-            
+
+        n_adults = Number(nb_adult.value);
+        n_children = Number(nb_children.value);
+        n_household = n_adults + n_children;
+        txt_nbMenage.innerHTML = n_household;
+        if (n_household == 1){
+            txt_pourN.style.display = "none";
         }
-        else if (Number(nb_adult.value) > 1){
-            nb_menage = (Number(nb_adult.value)-1)*0.5 + 1 + 0.3*(Number(nb_children.value));
-            txt_nbMenage.innerHTML = nb_menage;
+
+        if (n_adults == 1){
+            equivalent_size = n_adults + 0.3 * n_children;
         }
-        ajusted_income = income/nb_menage;
-        txt_revenu.innerHTML = income + '€';
+        else if (n_adults > 1){
+            equivalent_size = (n_adults - 1) * 0.5 + 1 + 0.3 * (n_children);
+        }
+        ajusted_income = yearlyIncome / equivalent_size;
+        
         percentile = getPercentile(ajusted_income);
         //console.log(percentile);
         pourcentage_position = 100 - percentile;
@@ -1699,7 +1738,7 @@ function App(){
             }
         }
         //console.log("quotient familial : ", quotient_familial);
-        let revenu_imposable = income / quotient_familial;
+        let revenu_imposable = yearlyIncome / quotient_familial;
         let impots;
         if (revenu_imposable <= 10777){
             impots = 0;
@@ -1717,12 +1756,12 @@ function App(){
             impots = (16700*0.11 + 51091*0.3 + 90423*0.41 + (revenu_imposable - 168994)*0.45)*quotient_familial;
         }
         //console.log("impots : ", impots);
-        let egibility_cap = 0.2*income;
-        let don = (initSliderValue.value/100)*income;
+        let egibility_cap = 0.2*yearlyIncome;
+        let don = (initSliderValue.value/100)*yearlyIncome;
         console.log(don);
         let deductible_amount;
         if (don > egibility_cap){
-            deductible_amount = 0.66*0.2*income;
+            deductible_amount = 0.66*0.2*yearlyIncome;
         }
         else if (don <= egibility_cap){
             deductible_amount = 0.66*don;
@@ -1736,13 +1775,13 @@ function App(){
             don_defisc_amount = impots;
         }
         don_defisc = don - don_defisc_amount;
-        don_defisc_percentIncome = (don_defisc/income)*100;
+        don_defisc_percentIncome = (don_defisc/yearlyIncome)*100;
         don_defisc_percentIncome = Math.round(don_defisc_percentIncome*10)/10;
         realSliderValue.value = don_defisc_percentIncome;
         txt_donInit.innerHTML = initSliderValue.value.toString() + "%";
         txt_donReal.innerHTML = don_defisc_percentIncome.toString() + "%";
-        let incomePostDon = income - don_defisc;
-        let ajusted_incomePD = incomePostDon/nb_menage;
+        let incomePostDon = yearlyIncome - don_defisc;
+        let ajusted_incomePD = incomePostDon/equivalent_size;
         let percentilePostDon = getPercentile(ajusted_incomePD);
         let positionPostDon = document.getElementById("positionPostDon");
         let pourcentage_positionPD = 100 - percentilePostDon;
@@ -1805,10 +1844,6 @@ function App(){
             txt_privilegie.style.display = "block";
         }
     }
-    else {
-        document.getElementById('invalidForm').style.visibility = "visible";
-    }
-
 }
 
 
