@@ -84,33 +84,44 @@
         <section class="income_position">
             <h2 class="subject">
                 Avec un revenu de
-                <span id="txt_revenu" class="important_txt">x€</span>
-                par an<span id="txt_pourN">
+                <span id="txt_revenu" class="important_txt">
+                    x€
+                </span>
+                    par an
+                <span id="txt_pourN">
                     pour 
                     <span id="txt_nbMenage" class="important_txt">
                         n
                     </span>
                     <a href="#note1" class="footNote">1</a>
                 </span>, <br>
-                vous êtes parmi les <span id="txt_pourcentagePosition" class="important_txt">7%</span> les plus riches du monde.</h2>
+                vous êtes parmi les
+                <span id="txt_pourcentagePosition" class="important_txt">
+                    y%
+                </span>
+                les plus riches du monde.
+            </h2>        
+
+            <div id="graph_container" class="graph_container">
                 
-                <div id="graph_container" class="graph_container">
+                <div id="income_position_bar" class="income_position_bar">
+                    <div class="poorer_position">
+                        <span class="material-symbols-outlined poor_arrow">
+                            arrow_upward
+                        </span>
+                        <p class="txt_poorer_position">
+                            Personnes moins riches que vous
+                        </p>
+                    </div>
                     
-                    <div id="income_position_bar" class="income_position_bar">
-                        <div class="poorer_position">
-                            <span class="material-symbols-outlined poor_arrow">
-                                arrow_upward </span>
-                            <p class="txt_poorer_position">Personnes moins riches que vous</p>
-                        </div>
-                        
-                        <div class="your_position">
-                            <p class="txt_your_position">Vous</p>
-                            <span class="material-symbols-outlined your_arrow">
+                    <div class="your_position">
+                        <p class="txt_your_position">Vous</p>
+                        <span class="material-symbols-outlined your_arrow">
                             arrow_downward
-                            </span>
-                        </div>
+                        </span>
                     </div>
                 </div>
+            </div>
         </section>
         <section class="median_income">
 
