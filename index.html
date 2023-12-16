@@ -1121,9 +1121,11 @@ function enableButton(){
     let button = document.getElementById("calculerSituation");
     if (formValid()){
         button.style.backgroundColor = "#00829C";
+        button.style.cursor = "pointer";
     }
     else{
         button.style.backgroundColor = "#d9d9d9";
+        button.style.cursor = "default";
     }
 }
 initialForm.addEventListener('input', enableButton);
