@@ -1114,7 +1114,7 @@ else{
 
 /* Form on change */
 function formValid(){
-    return revenu.value != 0 && nb_adult.value != 0;
+    return revenu.value != 0 && (nb_adult.value === "" || nb_adult.value != 0);
 }
 
 function enableButton(){
@@ -1617,8 +1617,16 @@ function App(){
     
 
     if (formValid()){
-        // App
         containerApp.style.display = "block";
+        
+        // Use placeholder default values if "Adultes" and "Enfants" are empty
+        if (nb_adult.value === ""){
+            nb_adult.value = 1
+        }
+        if (nb_children.value === ""){
+            nb_children.value = 0
+        }
+
         if (annuel_radio.checked == true){
             income = revenu.value;
         }
