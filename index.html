@@ -29,7 +29,6 @@
         <h2 class="subject">Vous êtes probablement plus riche que vous ne le pensez - faites le test !</h2>
     
         <form id="initialForm">
-            <p class="invalidForm" id="invalidForm">*Veuillez remplir tous les champs</p>
             <!-- <div class="income_input_container"> -->
                 <div class="form__group">
                     
@@ -362,11 +361,6 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-.invalidForm{
-    transform: translateY(-30px);
-    color: #c43d3d;
-    visibility: hidden;
 }
 .income_input_container{
     width: 100%;
@@ -1850,10 +1844,6 @@ function App(){
             txt_privilegie.style.display = "block";
         }
     }
-    else {
-        document.getElementById('invalidForm').style.visibility = "visible";
-    }
-
 }
 
 
