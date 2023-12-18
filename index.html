@@ -1165,15 +1165,12 @@ function checkIncomePeriod(){
 }
 
 document.getElementById("containerHRAI").addEventListener("change", onChangeReload);
-//window.addEventListener('resize', onWindowResize);
+window.addEventListener('resize', App);
 
-function onWindowResize(){
-    window.location.reload();
-}
 
 function onChangeReload() {
     checkIncomePeriod();
-    checkFormSitu();
+    enableLaunchButton();
     //App();
 }
 
