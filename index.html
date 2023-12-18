@@ -1258,6 +1258,21 @@ function getTax(taxableIncome, quotientFamilial){
 }
 
 
+function getDeductibleAmount(yearlyIncome, donation){
+    let deductibleAmount;
+    let egibilityCap = 0.2 * yearlyIncome;
+
+    if (donation > egibilityCap){
+        deductibleAmount = 0.66 * 0.2 * yearlyIncome;
+    }
+    else if (donation <= egibilityCap){
+        deductibleAmount = 0.66 * donation;
+    }
+
+    return deductibleAmount;
+}
+
+
 function getPercentile(income){
     let global_income_distrib = [
         {
@@ -1767,37 +1782,34 @@ function App(){
         compare_barPoor.style.width = (compare_barYou_width/times10poorest).toString() + "px";
 
         let quotientFamilial = getQuotientFamilial(n_adults, n_children);
-        
         //console.log("quotient familial : ", quotientFamilial);
 
         let taxableIncome = yearlyIncome / quotientFamilial;
         let tax = getTax(taxableIncome, quotientFamilial);
         //console.log("tax : ", tax);
 
-        let egibility_cap = 0.2*yearlyIncome;
-        let don = (initSliderValue.value/100)*yearlyIncome;
-        console.log(don);
-        let deductible_amount;
-        if (don > egibility_cap){
-            deductible_amount = 0.66*0.2*yearlyIncome;
-        }
-        else if (don <= egibility_cap){
-            deductible_amount = 0.66*don;
-        }
-        //console.log("deductible amount : ", deductible_amount);
+        let donationShare = (initSliderValue.value / 100);
+        let donation = donationShare * yearlyIncome;
+        console.log(donation);
+        
+        let deductibleAmount = getDeductibleAmount(yearlyIncome, donation);
+        //console.log("deductible amount : ", deductibleAmount);
+
         let don_defisc, don_defisc_amount, don_defisc_percentIncome;
-        if (tax > deductible_amount){
-            don_defisc_amount = deductible_amount;
+        if (tax > deductibleAmount){
+            don_defisc_amount = deductibleAmount;
         }
-        else if (tax <= deductible_amount){
+        else if (tax <= deductibleAmount){
             don_defisc_amount = tax;
         }
-        don_defisc = don - don_defisc_amount;
+        don_defisc = donation - don_defisc_amount;
         don_defisc_percentIncome = (don_defisc/yearlyIncome)*100;
         don_defisc_percentIncome = Math.round(don_defisc_percentIncome*10)/10;
+
         realSliderValue.value = don_defisc_percentIncome;
         txt_donInit.innerHTML = initSliderValue.value.toString() + "%";
         txt_donReal.innerHTML = don_defisc_percentIncome.toString() + "%";
+
         let incomePostDon = yearlyIncome - don_defisc;
         let ajusted_incomePD = incomePostDon/equivalent_size;
         let percentilePostDon = getPercentile(ajusted_incomePD);
@@ -1812,7 +1824,7 @@ function App(){
         income_position_barPD.style.width = ((percentilePostDon/100)*graph_widthPD).toString()+"px";
 
         let txt_amountDon = document.getElementById("txt_amountDon");
-        let txt_don = Math.round(don);
+        let txt_don = Math.round(donation);
         txt_amountDon.innerHTML = txt_don.toString() + "€";
         let txt_amountDonDefisc = document.getElementById("txt_amountDonDefisc");
         let txt_donDefisc = Math.round(don_defisc);
@@ -1824,10 +1836,10 @@ function App(){
         let Unitaire_CO2 = 9; //cout d'une tonne évitée en euros;
         let emissionMoy_fce = 4.46; //emission moyenne d'un francais en tonnes 
 
-        let don_moustiquaire = don/prixUnitaire_moustiquaire ; // nombre de moustiquaires pouvant être financer
-        let don_vieSauvee = don/moustiquaire_vieSauvee; // nombre de vie sauvée
-        let don_vieEnCage = don/Unitaire_vieEnCage; // nombre d'années de vie en cage évitées
-        let don_CO2 = don/Unitaire_CO2; // nombre de tonnes évitées
+        let don_moustiquaire = donation/prixUnitaire_moustiquaire ; // nombre de moustiquaires pouvant être financer
+        let don_vieSauvee = donation/moustiquaire_vieSauvee; // nombre de vie sauvée
+        let don_vieEnCage = donation/Unitaire_vieEnCage; // nombre d'années de vie en cage évitées
+        let don_CO2 = donation/Unitaire_CO2; // nombre de tonnes évitées
         let don_emissionMoy_fce = don_CO2/emissionMoy_fce; 
 
         don_moustiquaire = Math.round(don_moustiquaire);
