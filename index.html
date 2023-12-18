@@ -1260,18 +1260,26 @@ function getTax(income, nParts){
 }
 
 
-function getDeductibleAmount(yearlyIncome, donation){
-    let deductibleAmount;
-    let egibilityCap = 0.2 * yearlyIncome;
+function getDeductibleAmount(income, donation, nParts){
+    let tax = getTax(income, nParts);
+    let eligibilityCap = 0.20 * income;
+    let deductionRate = 0.66;
 
-    if (donation > egibilityCap){
-        deductibleAmount = 0.66 * 0.2 * yearlyIncome;
-    }
-    else if (donation <= egibilityCap){
-        deductibleAmount = 0.66 * donation;
-    }
-
+    let elligibleAmount = Math.min(donation, eligibilityCap);
+    let deductibleAmount = Math.min(elligibleAmount * deductionRate, tax);
+    
+    console.log("Income tax: ", tax);
+    console.log("Deductible amount: ", deductibleAmount);
     return deductibleAmount;
+}
+
+
+function getDonationPostTax(income, donation, nParts){
+    let deductibleAmount = getDeductibleAmount(income, donation, nParts);
+    let donationPostTax = donation - deductibleAmount;
+    
+    console.log("Post tax donation : ", donationPostTax);
+    return donationPostTax;
 }
 
 
@@ -1707,10 +1715,10 @@ function App(){
         
         // Use placeholder default values if "Adultes" and "Enfants" are empty
         if (nb_adult.value === ""){
-            nb_adult.value = 1
+            nb_adult.value = 1;
         }
         if (nb_children.value === ""){
-            nb_children.value = 0
+            nb_children.value = 0;
         }
 
 
@@ -1784,34 +1792,22 @@ function App(){
         compare_barPoor.style.width = (compare_barYou_width/times10poorest).toString() + "px";
 
         let nParts = getNParts(n_adults, n_children);
-        //console.log("nombre de parts : ", nParts);
-
-        let tax = getTax(yearlyIncome, nParts);
-        //console.log("tax : ", tax);
+        console.log("Nombre de parts : ", nParts);
 
         let donationShare = (initSliderValue.value / 100);
         let donation = donationShare * yearlyIncome;
-        console.log(donation);
+        console.log("Donation: ", donation);
         
-        let deductibleAmount = getDeductibleAmount(yearlyIncome, donation);
-        //console.log("deductible amount : ", deductibleAmount);
+        let donationPostTax = getDonationPostTax(yearlyIncome, donation, nParts);
 
-        let don_defisc, don_defisc_amount, don_defisc_percentIncome;
-        if (tax > deductibleAmount){
-            don_defisc_amount = deductibleAmount;
-        }
-        else if (tax <= deductibleAmount){
-            don_defisc_amount = tax;
-        }
-        don_defisc = donation - don_defisc_amount;
-        don_defisc_percentIncome = (don_defisc/yearlyIncome)*100;
-        don_defisc_percentIncome = Math.round(don_defisc_percentIncome*10)/10;
+        donationPostTaxShare = (donationPostTax / yearlyIncome) * 100;
+        donationPostTaxShare = Math.round(donationPostTaxShare*10)/10;
 
-        realSliderValue.value = don_defisc_percentIncome;
+        realSliderValue.value = donationPostTaxShare;
         txt_donInit.innerHTML = initSliderValue.value.toString() + "%";
-        txt_donReal.innerHTML = don_defisc_percentIncome.toString() + "%";
+        txt_donReal.innerHTML = donationPostTaxShare.toString() + "%";
 
-        let incomePostDon = yearlyIncome - don_defisc;
+        let incomePostDon = yearlyIncome - donationPostTax;
         let ajusted_incomePD = incomePostDon/equivalent_size;
         let percentilePostDon = getPercentile(ajusted_incomePD);
         let positionPostDon = document.getElementById("positionPostDon");
@@ -1828,7 +1824,7 @@ function App(){
         let txt_don = Math.round(donation);
         txt_amountDon.innerHTML = txt_don.toString() + "€";
         let txt_amountDonDefisc = document.getElementById("txt_amountDonDefisc");
-        let txt_donDefisc = Math.round(don_defisc);
+        let txt_donDefisc = Math.round(donationPostTax);
         txt_amountDonDefisc.innerHTML = txt_donDefisc.toString() + "€";
         
         let prixUnitaire_moustiquaire = 4.49; // cout d'une moustiquaire en euros
