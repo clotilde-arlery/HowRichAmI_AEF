@@ -1208,6 +1208,56 @@ for (i = 0; i < acc.length; i++) {
   });
 } 
 
+/* App secundary functions */
+function getQuotientFamilial(n_adults, n_children){
+    let quotientFamilial;
+    if (n_adults == 1){
+            if (n_children == 0){
+                quotientFamilial = 1;
+            }
+            else if (n_children == 1){
+                quotientFamilial = 1.5;
+            }
+            else if (n_children >= 2){
+                quotientFamilial = n_children;
+            }     
+        }
+        else if (n_adults > 1){
+            if (n_children == 0){
+                quotientFamilial = 2;
+            }
+            else if (n_children == 1){
+                quotientFamilial = 2.5;
+            }
+            else if (n_children >= 2){
+                quotientFamilial = n_children + 1;
+            }
+        }
+    return quotientFamilial
+}
+
+
+function getTax(taxableIncome, quotientFamilial){
+    let tax;
+    if (taxableIncome <= 10777){
+            tax = 0;
+        }
+        else if (taxableIncome >= 10778 && taxableIncome <= 27478){
+            tax = ((taxableIncome - 10778)*0.11)*quotientFamilial;
+        }
+        else if (taxableIncome >= 27479 && taxableIncome <= 78570){
+            tax = (16700*0.11 + (taxableIncome - 27479)*0.3)*quotientFamilial;
+        }
+        else if (taxableIncome >= 78571 && taxableIncome <= 168994){
+            tax = (16700*0.11 + 51091*0.3 + (taxableIncome - 78571)*0.41)*quotientFamilial;
+        }
+        else if (taxableIncome > 168994){
+            tax = (16700*0.11 + 51091*0.3 + 90423*0.41 + (taxableIncome - 168994)*0.45)*quotientFamilial;
+        }
+    return tax;
+}
+
+
 function getPercentile(income){
     let global_income_distrib = [
         {
@@ -1623,6 +1673,8 @@ function getPercentile(income){
     return percentile;
 }
 
+
+/* Main App function */
 function App(){
     let equivalent_size, percentile, pourcentage_position, timesRevenuMedian, ajusted_income;
     let txt_period = document.getElementById('txt_period');
@@ -1713,49 +1765,15 @@ function App(){
         //console.log(compare_barYou_width);
         compare_barMedian.style.width = (compare_barYou_width/timesRevenuMedian).toString() + "px";
         compare_barPoor.style.width = (compare_barYou_width/times10poorest).toString() + "px";
-        let quotient_familial;
-        if (n_adults == 1){
-            if (n_children == 0){
-                quotient_familial = 1;
-            }
-            else if (n_children == 1){
-                quotient_familial = 1.5;
-            }
-            else if (n_children >= 2){
-                quotient_familial = n_children;
-            }
-            
-        }
-        else if (n_adults > 1){
-            if (n_children == 0){
-                quotient_familial = 2;
-            }
-            else if (n_children == 1){
-                quotient_familial = 2.5;
-            }
-            else if (n_children >= 2){
-                quotient_familial = n_children + 1;
-            }
-        }
-        //console.log("quotient familial : ", quotient_familial);
-        let revenu_imposable = yearlyIncome / quotient_familial;
-        let impots;
-        if (revenu_imposable <= 10777){
-            impots = 0;
-        }
-        else if (revenu_imposable >= 10778 && revenu_imposable <= 27478){
-            impots = ((revenu_imposable - 10778)*0.11)*quotient_familial;
-        }
-        else if (revenu_imposable >= 27479 && revenu_imposable <= 78570){
-            impots = (16700*0.11 + (revenu_imposable - 27479)*0.3)*quotient_familial;
-        }
-        else if (revenu_imposable >= 78571 && revenu_imposable <= 168994){
-            impots = (16700*0.11 + 51091*0.3 + (revenu_imposable - 78571)*0.41)*quotient_familial;
-        }
-        else if (revenu_imposable > 168994){
-            impots = (16700*0.11 + 51091*0.3 + 90423*0.41 + (revenu_imposable - 168994)*0.45)*quotient_familial;
-        }
-        //console.log("impots : ", impots);
+
+        let quotientFamilial = getQuotientFamilial(n_adults, n_children);
+        
+        //console.log("quotient familial : ", quotientFamilial);
+
+        let taxableIncome = yearlyIncome / quotientFamilial;
+        let tax = getTax(taxableIncome, quotientFamilial);
+        //console.log("tax : ", tax);
+
         let egibility_cap = 0.2*yearlyIncome;
         let don = (initSliderValue.value/100)*yearlyIncome;
         console.log(don);
@@ -1768,11 +1786,11 @@ function App(){
         }
         //console.log("deductible amount : ", deductible_amount);
         let don_defisc, don_defisc_amount, don_defisc_percentIncome;
-        if (impots > deductible_amount){
+        if (tax > deductible_amount){
             don_defisc_amount = deductible_amount;
         }
-        else if (impots <= deductible_amount){
-            don_defisc_amount = impots;
+        else if (tax <= deductible_amount){
+            don_defisc_amount = tax;
         }
         don_defisc = don - don_defisc_amount;
         don_defisc_percentIncome = (don_defisc/yearlyIncome)*100;
