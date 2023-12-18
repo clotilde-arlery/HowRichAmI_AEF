@@ -1209,50 +1209,52 @@ for (i = 0; i < acc.length; i++) {
 } 
 
 /* App secundary functions */
-function getQuotientFamilial(n_adults, n_children){
-    let quotientFamilial;
+function getNParts(n_adults, n_children){
+    let nParts;
     if (n_adults == 1){
             if (n_children == 0){
-                quotientFamilial = 1;
+                nParts = 1;
             }
             else if (n_children == 1){
-                quotientFamilial = 1.5;
+                nParts = 1.5;
             }
             else if (n_children >= 2){
-                quotientFamilial = n_children;
+                nParts = n_children;
             }     
         }
         else if (n_adults > 1){
             if (n_children == 0){
-                quotientFamilial = 2;
+                nParts = 2;
             }
             else if (n_children == 1){
-                quotientFamilial = 2.5;
+                nParts = 2.5;
             }
             else if (n_children >= 2){
-                quotientFamilial = n_children + 1;
+                nParts = n_children + 1;
             }
         }
-    return quotientFamilial
+    return nParts;
 }
 
 
-function getTax(taxableIncome, quotientFamilial){
+function getTax(income, nParts){
     let tax;
-    if (taxableIncome <= 10777){
+    let quotientFamilial = yearlyIncome / nParts;
+
+    if (income <= 10777){
             tax = 0;
         }
-        else if (taxableIncome >= 10778 && taxableIncome <= 27478){
-            tax = ((taxableIncome - 10778)*0.11)*quotientFamilial;
+        else if (income >= 10778 && income <= 27478){
+            tax = ((income - 10778)*0.11)*nParts;
         }
-        else if (taxableIncome >= 27479 && taxableIncome <= 78570){
-            tax = (16700*0.11 + (taxableIncome - 27479)*0.3)*quotientFamilial;
+        else if (income >= 27479 && income <= 78570){
+            tax = (16700*0.11 + (income - 27479)*0.3)*nParts;
         }
-        else if (taxableIncome >= 78571 && taxableIncome <= 168994){
-            tax = (16700*0.11 + 51091*0.3 + (taxableIncome - 78571)*0.41)*quotientFamilial;
+        else if (income >= 78571 && income <= 168994){
+            tax = (16700*0.11 + 51091*0.3 + (income - 78571)*0.41)*nParts;
         }
-        else if (taxableIncome > 168994){
-            tax = (16700*0.11 + 51091*0.3 + 90423*0.41 + (taxableIncome - 168994)*0.45)*quotientFamilial;
+        else if (income > 168994){
+            tax = (16700*0.11 + 51091*0.3 + 90423*0.41 + (income - 168994)*0.45)*nParts;
         }
     return tax;
 }
@@ -1781,11 +1783,10 @@ function App(){
         compare_barMedian.style.width = (compare_barYou_width/timesRevenuMedian).toString() + "px";
         compare_barPoor.style.width = (compare_barYou_width/times10poorest).toString() + "px";
 
-        let quotientFamilial = getQuotientFamilial(n_adults, n_children);
-        //console.log("quotient familial : ", quotientFamilial);
+        let nParts = getNParts(n_adults, n_children);
+        //console.log("nombre de parts : ", nParts);
 
-        let taxableIncome = yearlyIncome / quotientFamilial;
-        let tax = getTax(taxableIncome, quotientFamilial);
+        let tax = getTax(yearlyIncome, nParts);
         //console.log("tax : ", tax);
 
         let donationShare = (initSliderValue.value / 100);
