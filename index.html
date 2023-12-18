@@ -1046,12 +1046,14 @@ code{
         }
 	input[type="range"]::-webkit-slider-thumb {
 	        height: 10px;
-	        width: 10px; 
+	        width: 10px;
+            margin-top: -2px;      /* Re-center thumb on track */
         }
         /***** Firefox *****/
         input[type="range"]::-moz-range-thumb {
             height: 10px;
             width: 10px;
+            margin-top: -2px;
         }
         #doubleRangeReal::-webkit-slider-runnable-track {
             height: 5px;
