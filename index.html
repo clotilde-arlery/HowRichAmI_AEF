@@ -1114,7 +1114,7 @@ let txt_donReal = document.getElementById("txt_donReal");
 
 launchButton.addEventListener('click', App);
 initialForm.addEventListener('input', enableLaunchButton);
-document.addEventListener('keydown', launchIfReturnKeyIsPressed);
+document.addEventListener('keydown', launchIfEnterKeyIsPressed);
 range_input.addEventListener('input', App);
 
 initSliderValue.value = 10;
@@ -1140,11 +1140,9 @@ function enableLaunchButton(){
     }
 }
 
-function launchIfReturnKeyIsPressed(key){
-    let return_key = 13;
-    let pressed_key = key.which;
-    if (pressed_key == return_key){
-        App()
+function launchIfEnterKeyIsPressed(event){
+    if (event.key == "Enter"){
+        App(event);
     }
 }
 
