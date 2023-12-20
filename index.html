@@ -152,8 +152,8 @@
             <h2 class="subject">En donnant <span id="txt_donInit" class="important_txt">23%</span> de vos revenus, <br>soit <span id="txt_donReal" class="don_real">10%</span> après réduction d'impôts<a href="#note2" class="footNote">2</a>...</h2>
             
             <div id="range_input" class="range_input">
-                <input type="range" name="rangeInit" id="doubleRangeInit" min="1" max="50" value="10" step="1">
-                <input type="range" name="rangeReal" id="doubleRangeReal" min="1" max="50" value="5" step="1">
+                <input type="range" name="preTaxSlider" id="preTaxSlider" min="1" max="50" value="10" step="1">
+                <input type="range" name="postTaxSlider" id="postTaxSlider" min="1" max="50" value="5" step="1">
                 <ul class="legend">
                     <li>1%</li>
                     <li>10%</li>
@@ -739,11 +739,11 @@ input[type="range"]{
     width: 50%;
     align-self: center;
 }
-#doubleRangeInit{
+#preTaxSlider{
     position: absolute;
     z-index: 1;
 }
-#doubleRangeReal{
+#postTaxSlider{
     position: absolute;
     z-index: 0;
 }
@@ -799,28 +799,28 @@ input[type="range"]:focus::-webkit-slider-thumb {
 input[type="range"]:focus::-moz-range-thumb {
     box-shadow: 0px 0px 0px 5px #00829c7a;
 }
-#doubleRangeInit::-webkit-slider-runnable-track {
+#preTaxSlider::-webkit-slider-runnable-track {
     height: 0px;
 }
 
 /******** Firefox ********/
-#doubleRangeInit::-moz-range-track {
+#preTaxSlider::-moz-range-track {
     height: 0px;
 }
-#doubleRangeReal::-webkit-slider-runnable-track {
+#postTaxSlider::-webkit-slider-runnable-track {
     height: 10px;
 }
 
 /******** Firefox ********/
-#doubleRangeReal::-moz-range-track {
+#postTaxSlider::-moz-range-track {
     height: 10px;
 }
-#doubleRangeReal::-webkit-slider-thumb{
+#postTaxSlider::-webkit-slider-thumb{
     background-color: #FFB41A;
     box-shadow: 0px 0px 0px 5px #ffb31a7c;
     position: -webkit-sticky;
 }
-#doubleRangeReal::-moz-range-thumb{
+#postTaxSlider::-moz-range-thumb{
     background-color: #FFB41A;
     box-shadow: 0px 0px 0px 5px #ffb31a7c;
     position: sticky;
@@ -1056,12 +1056,12 @@ code{
             width: 10px;
             margin-top: -2px;
         }
-        #doubleRangeReal::-webkit-slider-runnable-track {
+        #postTaxSlider::-webkit-slider-runnable-track {
             height: 5px;
         }
 
         /******** Firefox ********/
-        #doubleRangeReal::-moz-range-track {
+        #postTaxSlider::-moz-range-track {
             height: 5px;
         }
 }
@@ -1106,8 +1106,8 @@ let initialForm = document.getElementById('initialForm');
 let launchButton = document.getElementById('calculerSituation');
 let containerApp = document.getElementById('containerApp');
 let yearlyIncome;
-let initSliderValue = document.getElementById("doubleRangeInit");
-let realSliderValue = document.getElementById("doubleRangeReal");
+let preTaxSlider = document.getElementById("preTaxSlider");
+let postTaxSlider = document.getElementById("postTaxSlider");
 let range_input = document.getElementById("range_input");
 let txt_donInit = document.getElementById("txt_donInit");
 let txt_donReal = document.getElementById("txt_donReal");
@@ -1117,7 +1117,7 @@ initialForm.addEventListener('input', enableLaunchButton);
 document.addEventListener('keydown', launchIfEnterKeyIsPressed);
 range_input.addEventListener('input', App);
 
-initSliderValue.value = 10;
+preTaxSlider.value = 10;
 
 /* Init form */
 let revenu = document.getElementById('name');
@@ -1258,12 +1258,12 @@ function getTax(income, nParts){
 }
 
 
-function getDeductibleAmount(income, donation, nParts){
+function getDeductibleAmount(income, donationPreTax, nParts){
     let tax = getTax(income, nParts);
     let eligibilityCap = 0.20 * income;
     let deductionRate = 0.66;
 
-    let elligibleAmount = Math.min(donation, eligibilityCap);
+    let elligibleAmount = Math.min(donationPreTax, eligibilityCap);
     let deductibleAmount = Math.min(elligibleAmount * deductionRate, tax);
     
     console.log("Income tax: ", tax);
@@ -1272,9 +1272,9 @@ function getDeductibleAmount(income, donation, nParts){
 }
 
 
-function getDonationPostTax(income, donation, nParts){
-    let deductibleAmount = getDeductibleAmount(income, donation, nParts);
-    let donationPostTax = donation - deductibleAmount;
+function getDonationPostTax(income, donationPreTax, nParts){
+    let deductibleAmount = getDeductibleAmount(income, donationPreTax, nParts);
+    let donationPostTax = donationPreTax - deductibleAmount;
     
     console.log("Post tax donation : ", donationPostTax);
     return donationPostTax;
@@ -1698,7 +1698,7 @@ function getPercentile(income){
 
 
 /* Main App function */
-function App(){
+function App(triggeringEvent){
     if (!formValid()) return;
 
     let equivalent_size, percentile, pourcentage_position, timesRevenuMedian, ajusted_income;
@@ -1708,7 +1708,17 @@ function App(){
     let txt_nbMenage = document.getElementById('txt_nbMenage');
     let txt_pourcentagePosition = document.getElementById('txt_pourcentagePosition');
     let individual_income_position;
-    
+
+    let inputIsPostTax;
+    if (triggeringEvent.type != "input"){
+        inputIsPostTax = false;
+    } 
+    else {
+        let inputName = triggeringEvent.srcElement.name;
+        inputIsPostTax = (inputName == "postTaxSlider");
+    }
+
+    // Display results
     containerApp.style.display = "block";
     
     // Use placeholder default values if "Adultes" and "Enfants" are empty
@@ -1792,18 +1802,17 @@ function App(){
     let nParts = getNParts(n_adults, n_children);
     console.log("Nombre de parts : ", nParts);
 
-    let donationShare = (initSliderValue.value / 100);
-    let donation = donationShare * yearlyIncome;
-    console.log("Donation: ", donation);
-    
-    let donationPostTax = getDonationPostTax(yearlyIncome, donation, nParts);
+    let donationPreTax, donationPostTax;
+    donationShare = (preTaxSlider.value / 100);
+    donationPreTax = donationShare * yearlyIncome;
+    donationPostTax = getDonationPostTax(yearlyIncome, donationPreTax, nParts);
 
     donationPostTaxShare = (donationPostTax / yearlyIncome) * 100;
     donationPostTaxShare = Math.round(donationPostTaxShare*10)/10;
-
-    realSliderValue.value = donationPostTaxShare;
-    txt_donInit.innerHTML = initSliderValue.value.toString() + "%";
+    postTaxSlider.value = donationPostTaxShare;
+    txt_donInit.innerHTML = preTaxSlider.value.toString() + "%";
     txt_donReal.innerHTML = donationPostTaxShare.toString() + "%";
+    
 
     let incomePostDon = yearlyIncome - donationPostTax;
     let ajusted_incomePD = incomePostDon/equivalent_size;
@@ -1819,7 +1828,7 @@ function App(){
     income_position_barPD.style.width = ((percentilePostDon/100)*graph_widthPD).toString()+"px";
 
     let txt_amountDon = document.getElementById("txt_amountDon");
-    let txt_don = Math.round(donation);
+    let txt_don = Math.round(donationPreTax);
     txt_amountDon.innerHTML = txt_don.toString() + "€";
     let txt_amountDonDefisc = document.getElementById("txt_amountDonDefisc");
     let txt_donDefisc = Math.round(donationPostTax);
@@ -1831,10 +1840,10 @@ function App(){
     let Unitaire_CO2 = 9; //cout d'une tonne évitée en euros;
     let emissionMoy_fce = 4.46; //emission moyenne d'un francais en tonnes 
 
-    let don_moustiquaire = donation/prixUnitaire_moustiquaire ; // nombre de moustiquaires pouvant être financer
-    let don_vieSauvee = donation/moustiquaire_vieSauvee; // nombre de vie sauvée
-    let don_vieEnCage = donation/Unitaire_vieEnCage; // nombre d'années de vie en cage évitées
-    let don_CO2 = donation/Unitaire_CO2; // nombre de tonnes évitées
+    let don_moustiquaire = donationPreTax/prixUnitaire_moustiquaire ; // nombre de moustiquaires pouvant être financer
+    let don_vieSauvee = donationPreTax/moustiquaire_vieSauvee; // nombre de vie sauvée
+    let don_vieEnCage = donationPreTax/Unitaire_vieEnCage; // nombre d'années de vie en cage évitées
+    let don_CO2 = donationPreTax/Unitaire_CO2; // nombre de tonnes évitées
     let don_emissionMoy_fce = don_CO2/emissionMoy_fce; 
 
     don_moustiquaire = Math.round(don_moustiquaire);
