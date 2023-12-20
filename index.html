@@ -149,7 +149,7 @@
         </section>
         <section class="donner">
 
-            <h2 class="subject">En donnant <span id="txt_donInit" class="important_txt">23%</span> de vos revenus, <br>soit <span id="txt_donReal" class="don_real">10%</span> après réduction d'impôts<a href="#note2" class="footNote">2</a>...</h2>
+            <h2 class="subject">En donnant <span id="txt_postTaxDonation" class="important_txt">23%</span> de vos revenus, <br>soit <span id="txt_preTaxDonation" class="don_real">10%</span> après réduction d'impôts<a href="#note2" class="footNote">2</a>...</h2>
             
             <div id="range_input" class="range_input">
                 <input type="range" name="preTaxSlider" id="preTaxSlider" min="1" max="50" value="10" step="1">
@@ -1109,8 +1109,8 @@ let yearlyIncome;
 let preTaxSlider = document.getElementById("preTaxSlider");
 let postTaxSlider = document.getElementById("postTaxSlider");
 let range_input = document.getElementById("range_input");
-let txt_donInit = document.getElementById("txt_donInit");
-let txt_donReal = document.getElementById("txt_donReal");
+let txt_postTaxDonation = document.getElementById("txt_postTaxDonation");
+let txt_preTaxDonation = document.getElementById("txt_preTaxDonation");
 
 launchButton.addEventListener('click', App);
 initialForm.addEventListener('input', enableLaunchButton);
@@ -1278,6 +1278,23 @@ function getDonationPostTax(income, donationPreTax, nParts){
     
     console.log("Post tax donation : ", donationPostTax);
     return donationPostTax;
+}
+
+
+function getDonationPreTax(income, donationPostTax, nParts){
+    let tax = getTax(income, nParts);
+    let eligibilityCap = 0.20 * income;
+    let deductionRate = 0.66;
+    let multiplier = 1 / (1 - deductionRate);
+
+    let multipliablePart = Math.min(donationPostTax,
+                                    eligibilityCap / multiplier);
+    let multipliedDonation = multipliablePart * multiplier;
+    let maximumDeduction = multipliedDonation * deductionRate;
+    let deduction = Math.min(maximumDeduction, tax);
+
+    let donationPreTax = donationPostTax + deduction;
+    return donationPreTax;
 }
 
 
@@ -1802,17 +1819,45 @@ function App(triggeringEvent){
     let nParts = getNParts(n_adults, n_children);
     console.log("Nombre de parts : ", nParts);
 
+    // Get slider input
     let donationPreTax, donationPostTax;
-    donationShare = (preTaxSlider.value / 100);
-    donationPreTax = donationShare * yearlyIncome;
-    donationPostTax = getDonationPostTax(yearlyIncome, donationPreTax, nParts);
-
-    donationPostTaxShare = (donationPostTax / yearlyIncome) * 100;
-    donationPostTaxShare = Math.round(donationPostTaxShare*10)/10;
-    postTaxSlider.value = donationPostTaxShare;
-    txt_donInit.innerHTML = preTaxSlider.value.toString() + "%";
-    txt_donReal.innerHTML = donationPostTaxShare.toString() + "%";
+    let donationPreTaxPercent, donationPostTaxPercent;
+    if (inputIsPostTax){
+        donationPostTaxPercent = postTaxSlider.value;
+        donationPostTax = (donationPostTaxPercent / 100) * yearlyIncome;
+        
+        donationPreTax = getDonationPreTax(yearlyIncome, donationPostTax, nParts);
+        donationPreTaxPercent = (donationPreTax / yearlyIncome) * 100;
+        donationPreTaxPercent = donationPreTaxPercent.toFixed(1);
     
+        preTaxSlider.value = donationPreTaxPercent;
+    }
+    else {
+        donationPreTaxPercent = preTaxSlider.value;
+        donationPreTax = (donationPreTaxPercent / 100) * yearlyIncome;
+        
+        donationPostTax = getDonationPostTax(yearlyIncome, donationPreTax, nParts);
+        donationPostTaxPercent = (donationPostTax / yearlyIncome) * 100;
+        donationPostTaxPercent = donationPostTaxPercent.toFixed(1);
+
+        postTaxSlider.value = donationPostTaxPercent;
+    }
+    
+    // Prevent pre-tax donation from going over 50%
+    if (donationPreTaxPercent > 50){
+        donationPreTaxPercent = 50;
+        donationPreTax = (donationPreTaxPercent / 100) * yearlyIncome;
+
+        donationPostTax = getDonationPostTax(yearlyIncome, donationPreTax, nParts);
+        donationPostTaxPercent = (donationPostTax / yearlyIncome) * 100;
+        donationPostTaxPercent = donationPostTaxPercent.toFixed(1);
+
+        postTaxSlider.value = donationPostTaxPercent;
+    }
+
+    // Update text above slider
+    txt_postTaxDonation.innerHTML = donationPreTaxPercent.toString() + "%";
+    txt_preTaxDonation.innerHTML = donationPostTaxPercent.toString() + "%";
 
     let incomePostDon = yearlyIncome - donationPostTax;
     let ajusted_incomePD = incomePostDon/equivalent_size;
