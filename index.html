@@ -1207,6 +1207,17 @@ for (i = 0; i < acc.length; i++) {
 } 
 
 /* App secundary functions */
+function formatNumber(x){
+    // Round to at most 1 decimal place (12.07 -> 12.1, and 12.02 -> 12)
+    x = Math.round(x * 10) / 10;
+
+    // Use French number formatting
+    x = x.toLocaleString('fr');
+
+    return x;
+}
+
+
 function getNParts(n_adults, n_children){
     let nParts;
     if (n_adults == 1){
@@ -1747,7 +1758,7 @@ function App(triggeringEvent){
     }
 
 
-    txt_revenu.innerHTML = revenu.value + '€';
+    txt_revenu.innerHTML = formatNumber(revenu.value) + '€';
     if (annuel_radio.checked){
         yearlyIncome = revenu.value;
         txt_period.innerHTML = "an";
@@ -1779,7 +1790,7 @@ function App(triggeringEvent){
     pourcentage_position = 100 - percentile;
     pourcentage_position = Math.round(pourcentage_position*10)/10;
     console.log("pourcentage position : ", pourcentage_position);
-    txt_pourcentagePosition.innerHTML = pourcentage_position.toString() + " %";
+    txt_pourcentagePosition.innerHTML = formatNumber(pourcentage_position) + "%";
     let graph_container = document.getElementById('graph_container');
     let income_position_bar = document.getElementById('income_position_bar');
     let graph_width = graph_container.clientWidth;
@@ -1788,24 +1799,24 @@ function App(triggeringEvent){
     timesRevenuMedian = ajusted_income/revenuMedian;
     timesRevenuMedian = (Math.round(timesRevenuMedian*10))/10;
     if (timesRevenuMedian > 1 ){
-        document.getElementById("timesRevenuMedian").innerHTML = timesRevenuMedian.toString() + " fois ";
+        document.getElementById("timesRevenuMedian").innerHTML = formatNumber(timesRevenuMedian) + " fois ";
     }
     else if (timesRevenuMedian == 1){
         document.getElementById("timesRevenuMedian").innerHTML = " environ ";
     }
     else if (timesRevenuMedian < 1 ){
-        document.getElementById("timesRevenuMedian").innerHTML = timesRevenuMedian.toString() + " fois ";
+        document.getElementById("timesRevenuMedian").innerHTML = formatNumber(timesRevenuMedian) + " fois ";
     }
     let times10poorest = ajusted_income/620.4;
     times10poorest = (Math.round(times10poorest*10))/10;
     if (times10poorest > 1 ){
-        document.getElementById("times10poorest").innerHTML = times10poorest.toString() + " fois ";
+        document.getElementById("times10poorest").innerHTML = formatNumber(times10poorest) + " fois ";
     }
     else if (times10poorest == 1){
-        document.getElementById("times10poorest").innerHTML = times10poorest.toString() + " environ ";
+        document.getElementById("times10poorest").innerHTML = formatNumber(times10poorest) + " environ ";
     }
     else if (times10poorest < 1 ){
-        document.getElementById("times10poorest").innerHTML = times10poorest.toString() + " fois ";
+        document.getElementById("times10poorest").innerHTML = formatNumber(times10poorest) + " fois ";
     }
     
     let compare_barPoor = document.getElementById("compare_barPoor");
@@ -1828,7 +1839,6 @@ function App(triggeringEvent){
         
         donationPreTax = getDonationPreTax(yearlyIncome, donationPostTax, nParts);
         donationPreTaxPercent = (donationPreTax / yearlyIncome) * 100;
-        donationPreTaxPercent = donationPreTaxPercent.toFixed(1);
     
         preTaxSlider.value = donationPreTaxPercent;
     }
@@ -1838,7 +1848,6 @@ function App(triggeringEvent){
         
         donationPostTax = getDonationPostTax(yearlyIncome, donationPreTax, nParts);
         donationPostTaxPercent = (donationPostTax / yearlyIncome) * 100;
-        donationPostTaxPercent = donationPostTaxPercent.toFixed(1);
 
         postTaxSlider.value = donationPostTaxPercent;
     }
@@ -1850,14 +1859,13 @@ function App(triggeringEvent){
 
         donationPostTax = getDonationPostTax(yearlyIncome, donationPreTax, nParts);
         donationPostTaxPercent = (donationPostTax / yearlyIncome) * 100;
-        donationPostTaxPercent = donationPostTaxPercent.toFixed(1);
 
         postTaxSlider.value = donationPostTaxPercent;
     }
 
     // Update text above slider
-    txt_postTaxDonation.innerHTML = donationPreTaxPercent.toString() + "%";
-    txt_preTaxDonation.innerHTML = donationPostTaxPercent.toString() + "%";
+    txt_postTaxDonation.innerHTML = formatNumber(donationPreTaxPercent) + "%";
+    txt_preTaxDonation.innerHTML = formatNumber(donationPostTaxPercent) + "%";
 
     let incomePostDon = yearlyIncome - donationPostTax;
     let ajusted_incomePD = incomePostDon/equivalent_size;
@@ -1865,7 +1873,7 @@ function App(triggeringEvent){
     let positionPostDon = document.getElementById("positionPostDon");
     let pourcentage_positionPD = 100 - percentilePostDon;
     pourcentage_positionPD = Math.round(pourcentage_positionPD*10)/10;
-    positionPostDon.innerHTML = pourcentage_positionPD.toString() + "%";
+    positionPostDon.innerHTML = formatNumber(pourcentage_positionPD) + "%";
 
     let graph_containerPD = document.getElementById('graph_containerPD');
     let income_position_barPD = document.getElementById('income_position_barPD');
@@ -1874,10 +1882,10 @@ function App(triggeringEvent){
 
     let txt_amountDon = document.getElementById("txt_amountDon");
     let txt_don = Math.round(donationPreTax);
-    txt_amountDon.innerHTML = txt_don.toString() + "€";
+    txt_amountDon.innerHTML = formatNumber(txt_don) + "€";
     let txt_amountDonDefisc = document.getElementById("txt_amountDonDefisc");
     let txt_donDefisc = Math.round(donationPostTax);
-    txt_amountDonDefisc.innerHTML = txt_donDefisc.toString() + "€";
+    txt_amountDonDefisc.innerHTML = formatNumber(txt_donDefisc) + "€";
     
     let prixUnitaire_moustiquaire = 4.49; // cout d'une moustiquaire en euros
     let moustiquaire_vieSauvee = 6327.59; // coût moyen par vie sauvée
@@ -1891,23 +1899,23 @@ function App(triggeringEvent){
     let don_CO2 = donationPreTax/Unitaire_CO2; // nombre de tonnes évitées
     let don_emissionMoy_fce = don_CO2/emissionMoy_fce; 
 
-    don_moustiquaire = Math.round(don_moustiquaire);
-    don_vieSauvee = Math.round(don_vieSauvee*10)/10;
-    don_vieEnCage = Math.round(don_vieEnCage);
-    don_CO2 = Math.round(don_CO2);
-    don_emissionMoy_fce = Math.round(don_emissionMoy_fce);
-
+    
     let txt_prixUnitaire_moustiquaire = document.getElementById("txt_prixUnitaire_moustiquaire");
     let txt_moustiquaire_vieSauvee = document.getElementById("txt_moustiquaire_vieSauvee");
     let txt_Unitaire_vieEnCage = document.getElementById("txt_Unitaire_vieEnCage");
     let txt_Unitaire_CO2 = document.getElementById("txt_Unitaire_CO2");
     let txt_emissionMoy_fce = document.getElementById("txt_emissionMoy_fce");
 
-    txt_prixUnitaire_moustiquaire.innerHTML = don_moustiquaire;
-    txt_moustiquaire_vieSauvee.innerHTML = don_vieSauvee;
-    txt_Unitaire_vieEnCage.innerHTML = don_vieEnCage;
-    txt_Unitaire_CO2.innerHTML = don_CO2;
-    txt_emissionMoy_fce.innerHTML = don_emissionMoy_fce;
+    don_moustiquaire = Math.round(don_moustiquaire);
+    don_vieEnCage = Math.round(don_vieEnCage);
+    don_CO2 = Math.round(don_CO2);
+    don_emissionMoy_fce = Math.round(don_emissionMoy_fce);
+
+    txt_prixUnitaire_moustiquaire.innerHTML = formatNumber(don_moustiquaire);
+    txt_moustiquaire_vieSauvee.innerHTML = formatNumber(don_vieSauvee);
+    txt_Unitaire_vieEnCage.innerHTML = formatNumber(don_vieEnCage);
+    txt_Unitaire_CO2.innerHTML = formatNumber(don_CO2);
+    txt_emissionMoy_fce.innerHTML = formatNumber(don_emissionMoy_fce);
     let privilegie;
     if (ajusted_income <= revenuMedian){
         privilegie = false;
