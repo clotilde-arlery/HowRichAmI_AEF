@@ -94,7 +94,6 @@
                     <span id="txt_nbMenage" class="important_txt">
                         n
                     </span>
-                    <a href="#note1" class="footNote">1</a>
                 </span>, <br>
                 vous êtes parmi les
                 <span id="txt_pourcentagePosition" class="important_txt">
@@ -149,7 +148,7 @@
         </section>
         <section class="donner">
 
-            <h2 class="subject">En donnant <span id="txt_postTaxDonation" class="important_txt">23%</span> de vos revenus, <br>soit <span id="txt_preTaxDonation" class="don_real">10%</span> après réduction d'impôts<a href="#note2" class="footNote">2</a>...</h2>
+            <h2 class="subject">En donnant <span id="txt_postTaxDonation" class="important_txt">23%</span> de vos revenus, <br>soit <span id="txt_preTaxDonation" class="don_real">10%</span> après réduction d'impôts<a href="#note1" class="footNote">1</a>...</h2>
             
             <div id="range_input" class="range_input">
                 <input type="range" name="preTaxSlider" id="preTaxSlider" min="1" max="50" value="10" step="1">
@@ -195,7 +194,7 @@
                     </div>
                     <p class="actionTxt">financer <span id="txt_prixUnitaire_moustiquaire" class="don_real"></span> moustiquaires,<br>et ainsi sauver environ<br>
                         <span id="txt_moustiquaire_vieSauvee" class="don_real info_cle"></span><br>
-                        vies en bonne santé<a href="#note3" class="footNote">3</a></p>
+                        vies en bonne santé<a href="#note2" class="footNote">2</a></p>
                 </div>
                 <div class="conseqDon">
                     <div class="imageAction">
@@ -205,7 +204,7 @@
                     </div>
                     <p class="actionTxt">ou bien, permettre d’éviter<br>
                         <span id="txt_Unitaire_vieEnCage" class="important_txt info_cle"></span><br>
-                        années de vie en cage<a href="#note4" class="footNote">4</a></p>
+                        années de vie en cage<a href="#note3" class="footNote">3</a></p>
                 </div>
                 <div class="conseqDon">
                     <div class="imageAction">
@@ -217,7 +216,7 @@
                     </div>
                     <p class="actionTxt">ou encore, éviter jusqu’à<br>
                         <span id="txt_Unitaire_CO2" class="important_txt info_cle"></span><br>
-                        tonnes de CO2, <br>soit <span id="txt_emissionMoy_fce" class="important_txt"></span> fois les émissions moyennes<br> d’une personne en France<a href="#note5" class="footNote">5</a>.</p>
+                        tonnes de CO2, <br>soit <span id="txt_emissionMoy_fce" class="important_txt"></span> fois les émissions moyennes<br> d’une personne en France<a href="#note4" class="footNote">4</a>.</p>
                 </div>
             </div>
 
@@ -242,52 +241,26 @@
                 <br>
                 <h3>Notes</h3>
                 <br>
-
-                <ol class="methodo_olListe">
-                        <li id="note1">Pour comparer des ménages de tailles différentes, nous utilisons l’échelle d’équivalence de l’OCDE :<br>
-                            <ul class="methodo_ulListe">
-                                <li>la première personne de plus de 14 ans compte pour 1</li>
-                                <li>les suivantes comptent pour 0,5</li>
-                                <li>et chaque personne de moins de 14 ans compte pour 0,3.</li>
-                            </ul>
-                            <br>
-                            <p>Par exemple, pour un ménage composé de 2 adultes et 1 enfant, votre revenu est divisé par 1,8 avant d’être comparé à la distribution mondiale des revenus. Ce calcul standard permet de tenir compte des économies d’échelle au sein du ménage.</p>
-                            <br>
-                        </li>
-                        <li id="note2">Certaines associations permettent de déduire une partie des dons de vos impôts sur le revenu. En France, cette réduction est de 66% du don, tant qu’il représente moins de 20% de votre revenu. Par ailleurs, vous ne pouvez pas déduire plus que 100% de vos impôts. Notre calculateur estime votre niveau d’impôts pour tenir compte de cette limite.</li>
-                        <br><li id="note3">Cf <a href="https://docs.google.com/spreadsheets/d/1tytvmV_32H8XGGRJlUzRDTKTHrdevPIYmb_uc6aLeas/edit">GiveWell Cost Analysis (2022), section AMF</a></li>
-                        <br><li id="note4">ACE ne donne pas d’estimation précise, parce qu’il y a trop d’incertitude, en revanche, <a href="https://www.founderspledge.com/downloads/fp-animal-welfare">Ce rapport de Founder’s pledge</a> donne l’ordre de grandeur de 10 années de vie de poule hors cage par dollar</li>
-                        <br><li id="note5">Selon <a href="https://www.givinggreen.earth/top-climate-change-nonprofit-donations-recommendations">Giving Green</a>, l'ordre de grandeur est de 10$ par tonne de CO2(eq) (pour Evergreen et GFI), soit 9 € / tCO2(eq). <br>Par ailleurs, selon le <a href="https://www.statistiques.developpement-durable.gouv.fr/edition-numerique/chiffres-cles-du-climat-2022/donnees-cles">Ministère de la transition écologique</a>(2019) un.e français.e émet en moyenne 4,8 tonnes de CO2 (tCO2 / hab / an)</li><br>
-
-                </ol>
-                <br>
-                <h3>Méthodologie</h3>
-                <br>
-                <p>
-                    Les données concernant la distribution mondiale des revenus proviennent de wid.world (World Inequality Database). Elles ont été simplement formatées pour les besoins du calculteur sans être modifiées. Elles sont téléchargeables sur wid.world ou sur <a href="ce repot Github">ce dépôt Github</a>.
-                    <br>
-                    La méthodologie de la distribution mondiale des revenus obtenue par WID est disponible <a href="https://wid.world/how-does-our-income-comparator-work/">ici</a>. La parité de pouvoir d'achat et l'inflation, entre autre choses, sont prises en compte dans l'élaboration de cette distribution des revenus.
-                    <br>
-                    <br>
-                    Pour déterminer le montant de don éligible à la réduction d'impôts propre au système français, nous calculons une estimation des impôts payés sur la base de votre salaire et du nombre d'adultes/enfants du ménage, ici, non pas avec l'échelle d'équivalence de l'OCDE mais, conformément au processus d'imposition, avec le quotient familial. En particulier, le quotient familial est calculé comme décrit <a href="https://www.economie.gouv.fr/particuliers/quotient-familial">ici</a> et les impôts sont calculés conformément au barème de l'impôt sur le revenu en suivant <a href="https://www.economie.gouv.fr/particuliers/tranches-imposition-impot-revenu">cette méthodologie</a>.
-                    <br>
-                    <br>
-                    En France, les dons peuvent être défiscalisés à hauteur de 66% dans la limite des 20% revenu imposable. Si votre don est supérieur à 20% du votre revenu imposable, on fixe un premier montant déductible de <code>66% x 20% x votre revenu</code>, sinon, ce premier montant déductible est fixé à <code>66% x le montant de votre don</code>. Cependant, la défiscalisation des dons est déduite sur vos impôts, donc dans la limite du montant de vos impôts. Pour déterminer le montant réellement déductible, il faut donc s'assurer que celui-ci soit strictement inférieur au montant des impôts à payer. Dans le cas contraire (premier montant déductible supérieur ou égal à vos impôts), le montant réellement déductible in fine sera le montant de vos impôts. 
-                    <br>
-                    <span style="font-style:italic;">Autrement dit, si le premier montant déductible est supérieur ou égal au montant d'impôts que vous payez, vous ne paierez plus d'impôts.</span>
-                    <br>
-                    Une fois le montant réellement déductible déterminé, on le soustrait à votre don inial pour obtenir le montant que vous allez vraiment sortir de votre poche (bien que la réduction d'impôts soit donc différée et effectuées sur vos impôts).
-                    <br>
-                </p>
-                <br>
-                <h3>Vos données</h3>
-                <br>
-                <p>Les données que vous entrez dans ce formulaire ne sont en aucun cas ni enregistrées ni envoyées.</p>
-                <br>
-                <h3>Réalisation</h3>
-                <br>
-                <p>Cette page a été réalisée par Clotilde Arléry et Rémi Turquier, et été inspirée par les calculateurs de richesse de <a href="https://howrichami.givingwhatwecan.org/how-rich-am-i">Giving What We Can</a> et <a href="https://wid.world/income-comparator/">World Inequality Database</a>.</p>
-
+                <ol>
+                    <li id="note1">Certaines associations permettent de déduire une partie des dons de vos impôts sur le revenu. Dans ce calculateur, les chiffres en jaune correspondent au cas où vous utilisez la déduction fiscale. Les chiffre en bleu ne tiennent pas compte de cet avantage. </li>
+                    <li id="note2">Selon une <a href='https://docs.google.com/spreadsheets/d/1tytvmV_32H8XGGRJlUzRDTKTHrdevPIYmb_uc6aLeas/edit'>estimation</a> de <a href='https://givewell.org'>GiveWell</a> en 2022, distribuer une moustiquaire contre le paludisme coûte 5$ à <a href='https://www.againstmalaria.com/'>Against Malaria Foundation</a>, et ces moustiquaires empêchent la mort d'une personne au bout de 7&nbsp;185$ en moyenne. </li>
+                    <li id="note3"><a href='https://www.founderspledge.com/downloads/fp-animal-welfare'>Un rapport</a> de <a href='https://www.founderspledge.com/'>Founders Pledge</a> estime en 2018 que chaque dollar donné à <a href='https://thehumaneleague.org/'>The Humane League</a> permet d'éviter 10 ans de vie en cage pour une poule d'élevage intensif. Ce chiffre reste incertain, et ne permet que de donner un ordre de grandeur.</li>
+                    <li id="note4">Dans son évaluation du <a href='https://gfi.org/'>Good Food Institute</a>, <a href='https://www.givinggreen.earth/top-climate-change-nonprofit-donations-recommendations'>Giving Green</a>  <a href='https://www.givinggreen.earth/mitigation-research/the-good-food-institute%3A-deep-dive#viewer-ws855612703'>estime</a> qu'éviter l'émission d'une tonne d'équivalent CO<sub>2</sub> a un coût de l'ordre de 10$. Il s'agit d'un ordre de grandeur, et ce chiffre reste incertain. Pour comparaison, le Ministère de la transition écologique <a href='https://www.statistiques.developpement-durable.gouv.fr/edition-numerique/chiffres-cles-du-climat-2022/donnees-cles'>estime</a> qu'en 2019, un‧e français‧e émet en moyenne 4,8 tonnes de CO<sub>2</sub> par an.</li>
+                    
+                    </ol>
+                    <br/>
+                    <h3 id='vos-données'>Vos données</h3>
+                    <p>Les données que vous entrez dans ce formulaire ne sont en aucun cas ni enregistrées ni envoyées.</p>
+                    <br/>
+                    <h3 id='méthodologie'>Méthodologie</h3>
+                    <p>Les données sur la distribution mondiale des revenus proviennent de la <a href='https://wid.world'>World Inequality Database</a>. La <a href='https://wid.world/how-does-our-income-comparator-work/'>méthodologie</a> utilisée pour construire cette base de données tient compte du niveau de vie de chaque pays et de l'inflation.</p>
+                    <br/>
+                    <p>Dans un ménage de plusieurs personnes, certaines dépenses sont mises en commun. Pour tenir compte de ces économies d'échelles, le revenu du ménage est divisé par un peu moins que le nombre de personnes qui le composent. Par exemple, pour un ménage de 3 personnes de plus 14 ans, le revenu total est divisé par 2, et non par 3. Le nombre d'<a href='https://www.insee.fr/fr/metadonnees/definition/c1802'>unités de consommation</a> du ménage est calculé selon l'échelle d'équivalence de l'OCDE.</p>
+                    <br/>
+                    <p>Certaines associations permettent de déduire une partie des dons de vos impôts sur le revenu. En France, cette réduction est de 66% du don, tant qu’il représente moins de 20% de votre revenu. Par ailleurs, vous ne pouvez pas déduire plus que 100% de vos impôts. Notre calculateur estime votre niveau d’impôts pour tenir compte de cette limite. Le <a href='https://www.economie.gouv.fr/particuliers/quotient-familial'>quotient familial</a> est estimé en fonction de la composition du ménage. Le <a href='https://www.economie.gouv.fr/particuliers/tranches-imposition-impot-revenu'>barême</a> de l'impôt sur le revenu est ensuite appliqué. L'estimation de l'impôt sur le revenu est simplifiée et approximative. Il ne s'agit pas d'un conseil fiscal.</p>
+                    <br/>
+                    <h3 id='réalisation'>Réalisation</h3>
+                    <p>Cette page a été réalisée par Clotilde Arléry et Rémi Turquier. Elle a été inspirée par les calculateurs de richesse de <a href='https://howrichami.givingwhatwecan.org/how-rich-am-i'>Giving What We Can</a> et de la <a href='https://wid.world/income-comparator/'>World Inequality Database</a>. Si vous constatez une erreur ou voulez nous faire un retour, n'hésitez pas à contacter ! &heartsuit;</p>
             </p>
             </div>
         </section>
@@ -929,10 +902,10 @@ input[type="range"]:focus::-moz-range-thumb {
 a {
     color: #35b8be;
 }
-.methodo_olListe{
+section.methodo ol {
     padding-left: 50px;
 }
-.methodo_ulListe{
+section.methodo ul {
     padding-left: 30px;
 }
 .footNote{
@@ -1207,6 +1180,17 @@ for (i = 0; i < acc.length; i++) {
 } 
 
 /* App secundary functions */
+function formatNumber(x){
+    // Round to at most 1 decimal place (12.07 -> 12.1, and 12.02 -> 12)
+    x = Math.round(x * 10) / 10;
+
+    // Use French number formatting
+    x = x.toLocaleString('fr');
+
+    return x;
+}
+
+
 function getNParts(n_adults, n_children){
     let nParts;
     if (n_adults == 1){
@@ -1747,7 +1731,7 @@ function App(triggeringEvent){
     }
 
 
-    txt_revenu.innerHTML = revenu.value + '€';
+    txt_revenu.innerHTML = formatNumber(revenu.value) + '€';
     if (annuel_radio.checked){
         yearlyIncome = revenu.value;
         txt_period.innerHTML = "an";
@@ -1779,7 +1763,7 @@ function App(triggeringEvent){
     pourcentage_position = 100 - percentile;
     pourcentage_position = Math.round(pourcentage_position*10)/10;
     console.log("pourcentage position : ", pourcentage_position);
-    txt_pourcentagePosition.innerHTML = pourcentage_position.toString() + " %";
+    txt_pourcentagePosition.innerHTML = formatNumber(pourcentage_position) + "%";
     let graph_container = document.getElementById('graph_container');
     let income_position_bar = document.getElementById('income_position_bar');
     let graph_width = graph_container.clientWidth;
@@ -1788,24 +1772,24 @@ function App(triggeringEvent){
     timesRevenuMedian = ajusted_income/revenuMedian;
     timesRevenuMedian = (Math.round(timesRevenuMedian*10))/10;
     if (timesRevenuMedian > 1 ){
-        document.getElementById("timesRevenuMedian").innerHTML = timesRevenuMedian.toString() + " fois ";
+        document.getElementById("timesRevenuMedian").innerHTML = formatNumber(timesRevenuMedian) + " fois ";
     }
     else if (timesRevenuMedian == 1){
         document.getElementById("timesRevenuMedian").innerHTML = " environ ";
     }
     else if (timesRevenuMedian < 1 ){
-        document.getElementById("timesRevenuMedian").innerHTML = timesRevenuMedian.toString() + " fois ";
+        document.getElementById("timesRevenuMedian").innerHTML = formatNumber(timesRevenuMedian) + " fois ";
     }
     let times10poorest = ajusted_income/620.4;
     times10poorest = (Math.round(times10poorest*10))/10;
     if (times10poorest > 1 ){
-        document.getElementById("times10poorest").innerHTML = times10poorest.toString() + " fois ";
+        document.getElementById("times10poorest").innerHTML = formatNumber(times10poorest) + " fois ";
     }
     else if (times10poorest == 1){
-        document.getElementById("times10poorest").innerHTML = times10poorest.toString() + " environ ";
+        document.getElementById("times10poorest").innerHTML = formatNumber(times10poorest) + " environ ";
     }
     else if (times10poorest < 1 ){
-        document.getElementById("times10poorest").innerHTML = times10poorest.toString() + " fois ";
+        document.getElementById("times10poorest").innerHTML = formatNumber(times10poorest) + " fois ";
     }
     
     let compare_barPoor = document.getElementById("compare_barPoor");
@@ -1828,7 +1812,6 @@ function App(triggeringEvent){
         
         donationPreTax = getDonationPreTax(yearlyIncome, donationPostTax, nParts);
         donationPreTaxPercent = (donationPreTax / yearlyIncome) * 100;
-        donationPreTaxPercent = donationPreTaxPercent.toFixed(1);
     
         preTaxSlider.value = donationPreTaxPercent;
     }
@@ -1838,7 +1821,6 @@ function App(triggeringEvent){
         
         donationPostTax = getDonationPostTax(yearlyIncome, donationPreTax, nParts);
         donationPostTaxPercent = (donationPostTax / yearlyIncome) * 100;
-        donationPostTaxPercent = donationPostTaxPercent.toFixed(1);
 
         postTaxSlider.value = donationPostTaxPercent;
     }
@@ -1850,14 +1832,13 @@ function App(triggeringEvent){
 
         donationPostTax = getDonationPostTax(yearlyIncome, donationPreTax, nParts);
         donationPostTaxPercent = (donationPostTax / yearlyIncome) * 100;
-        donationPostTaxPercent = donationPostTaxPercent.toFixed(1);
 
         postTaxSlider.value = donationPostTaxPercent;
     }
 
     // Update text above slider
-    txt_postTaxDonation.innerHTML = donationPreTaxPercent.toString() + "%";
-    txt_preTaxDonation.innerHTML = donationPostTaxPercent.toString() + "%";
+    txt_postTaxDonation.innerHTML = formatNumber(donationPreTaxPercent) + "%";
+    txt_preTaxDonation.innerHTML = formatNumber(donationPostTaxPercent) + "%";
 
     let incomePostDon = yearlyIncome - donationPostTax;
     let ajusted_incomePD = incomePostDon/equivalent_size;
@@ -1865,7 +1846,7 @@ function App(triggeringEvent){
     let positionPostDon = document.getElementById("positionPostDon");
     let pourcentage_positionPD = 100 - percentilePostDon;
     pourcentage_positionPD = Math.round(pourcentage_positionPD*10)/10;
-    positionPostDon.innerHTML = pourcentage_positionPD.toString() + "%";
+    positionPostDon.innerHTML = formatNumber(pourcentage_positionPD) + "%";
 
     let graph_containerPD = document.getElementById('graph_containerPD');
     let income_position_barPD = document.getElementById('income_position_barPD');
@@ -1874,15 +1855,15 @@ function App(triggeringEvent){
 
     let txt_amountDon = document.getElementById("txt_amountDon");
     let txt_don = Math.round(donationPreTax);
-    txt_amountDon.innerHTML = txt_don.toString() + "€";
+    txt_amountDon.innerHTML = formatNumber(txt_don) + "€";
     let txt_amountDonDefisc = document.getElementById("txt_amountDonDefisc");
     let txt_donDefisc = Math.round(donationPostTax);
-    txt_amountDonDefisc.innerHTML = txt_donDefisc.toString() + "€";
+    txt_amountDonDefisc.innerHTML = formatNumber(txt_donDefisc) + "€";
     
     let prixUnitaire_moustiquaire = 4.49; // cout d'une moustiquaire en euros
     let moustiquaire_vieSauvee = 6327.59; // coût moyen par vie sauvée
     let Unitaire_vieEnCage = 0.11; // cout pour une année de vie en cage évitée
-    let Unitaire_CO2 = 9; //cout d'une tonne évitée en euros;
+    let Unitaire_CO2 = 10; //cout d'une tonne évitée en euros;
     let emissionMoy_fce = 4.46; //emission moyenne d'un francais en tonnes 
 
     let don_moustiquaire = donationPreTax/prixUnitaire_moustiquaire ; // nombre de moustiquaires pouvant être financer
@@ -1891,23 +1872,23 @@ function App(triggeringEvent){
     let don_CO2 = donationPreTax/Unitaire_CO2; // nombre de tonnes évitées
     let don_emissionMoy_fce = don_CO2/emissionMoy_fce; 
 
-    don_moustiquaire = Math.round(don_moustiquaire);
-    don_vieSauvee = Math.round(don_vieSauvee*10)/10;
-    don_vieEnCage = Math.round(don_vieEnCage);
-    don_CO2 = Math.round(don_CO2);
-    don_emissionMoy_fce = Math.round(don_emissionMoy_fce);
-
+    
     let txt_prixUnitaire_moustiquaire = document.getElementById("txt_prixUnitaire_moustiquaire");
     let txt_moustiquaire_vieSauvee = document.getElementById("txt_moustiquaire_vieSauvee");
     let txt_Unitaire_vieEnCage = document.getElementById("txt_Unitaire_vieEnCage");
     let txt_Unitaire_CO2 = document.getElementById("txt_Unitaire_CO2");
     let txt_emissionMoy_fce = document.getElementById("txt_emissionMoy_fce");
 
-    txt_prixUnitaire_moustiquaire.innerHTML = don_moustiquaire;
-    txt_moustiquaire_vieSauvee.innerHTML = don_vieSauvee;
-    txt_Unitaire_vieEnCage.innerHTML = don_vieEnCage;
-    txt_Unitaire_CO2.innerHTML = don_CO2;
-    txt_emissionMoy_fce.innerHTML = don_emissionMoy_fce;
+    don_moustiquaire = Math.round(don_moustiquaire);
+    don_vieEnCage = Math.round(don_vieEnCage);
+    don_CO2 = Math.round(don_CO2);
+    don_emissionMoy_fce = Math.round(don_emissionMoy_fce);
+
+    txt_prixUnitaire_moustiquaire.innerHTML = formatNumber(don_moustiquaire);
+    txt_moustiquaire_vieSauvee.innerHTML = formatNumber(don_vieSauvee);
+    txt_Unitaire_vieEnCage.innerHTML = formatNumber(don_vieEnCage);
+    txt_Unitaire_CO2.innerHTML = formatNumber(don_CO2);
+    txt_emissionMoy_fce.innerHTML = formatNumber(don_emissionMoy_fce);
     let privilegie;
     if (ajusted_income <= revenuMedian){
         privilegie = false;
