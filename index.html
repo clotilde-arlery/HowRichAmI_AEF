@@ -1120,9 +1120,15 @@ function enableLaunchButton(){
 }
 
 function launchIfEnterKeyIsPressed(event){
-    if (event.key == "Enter"){
-        App(event);
+    if (event.key != "Enter"){
+        return;
     }
+
+    if (formValid() && event.target.localName == "input"){
+        event.target.blur(); // unfocus text field to hide keyboard on mobile
+    }
+
+    App(event);
 }
 
 
@@ -1724,6 +1730,7 @@ function App(triggeringEvent){
         let inputName = triggeringEvent.srcElement.name;
         inputIsPostTax = (inputName == "postTaxSlider");
     }
+
 
     // Display results
     containerApp.style.display = "block";
