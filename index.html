@@ -35,15 +35,15 @@
                     <input 
                         type="number"
                         class="form__field"
-                        placeholder="Name"
-                        name="name"
-                        id='name'
+                        placeholder=" "
+                        name="income"
+                        id='income'
                         required
                         title=""
                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                     />
                     <span class="devise">€</span>
-                    <label for="name" class="form__label">Revenu</label>
+                    <label for="income" class="form__label">Revenu</label>
     
                     
                     <div class="income_period">
@@ -1146,7 +1146,7 @@ range_input.addEventListener('input', App);
 preTaxSlider.value = 10;
 
 /* Init form */
-let revenu = document.getElementById('name');
+let revenu = document.getElementById('income');
 let nb_adult = document.getElementById('nb_adult');
 let nb_children= document.getElementById('nb_children');
 
