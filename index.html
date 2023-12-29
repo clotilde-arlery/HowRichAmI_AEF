@@ -32,7 +32,17 @@
             <!-- <div class="income_input_container"> -->
                 <div class="form__group">
                     
-                    <input type="number" class="form__field" placeholder="Name" name="name" id='name' required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/><span class="devise">€</span>
+                    <input 
+                        type="number"
+                        class="form__field"
+                        placeholder="Name"
+                        name="name"
+                        id='name'
+                        required
+                        title=""
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                    />
+                    <span class="devise">€</span>
                     <label for="name" class="form__label">Revenu</label>
     
                     
@@ -63,12 +73,30 @@
                 <div class="split_form_group">
                     <div class="relative_famille">
                         <p class="field_desc">Nombre d'adultes dans votre ménage</p>
-                        <input type="number" class="nb_adult" placeholder="1" name="adult" id='nb_adult' required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                        <input
+                            type="number"
+                            class="nb_adult"
+                            placeholder="1"
+                            name="adult"
+                            id='nb_adult'
+                            required
+                            title=""
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        />
                         <label for="nb_adult" class="nb_adult_label">Adultes</label>
                     </div>
                     <div class="relative_famille">
                         <p class="field_desc">Personnes de moins de 14 ans</p>
-                        <input type="number" class="nb_children" placeholder="0" name="children" id='nb_children' required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                        <input
+                            type="number"
+                            class="nb_children"
+                            placeholder="0"
+                            name="children"
+                            id='nb_children'
+                            required
+                            title=""
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        />
                         <label for="nb_children" class="nb_children_label">Enfants</label>
                     </div>
                 </div>
