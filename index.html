@@ -779,6 +779,7 @@ input[type="range"]{
 #preTaxSlider{
     position: absolute;
     z-index: 1;
+    visibility: hidden; /* Weird hack for Firefox. Handle turned visible later.*/
 }
 #postTaxSlider{
     position: absolute;
@@ -886,6 +887,12 @@ input[type="range"]:active::-moz-range-thumb {
     height: 10px;
 }
 
+#preTaxSlider::-webkit-slider-thumb {
+    visibility: visible;
+}
+#preTaxSlider::-moz-range-thumb {
+    visibility: visible;
+}
 
 #postTaxSlider::-webkit-slider-thumb{
     background-color: #FFB41A;
