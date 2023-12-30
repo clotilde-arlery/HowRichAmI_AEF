@@ -315,6 +315,7 @@
 }
 html{
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 /* Firefox */
 input[type="number"] {
@@ -1788,10 +1789,15 @@ function App(triggeringEvent){
         inputIsPostTax = (inputName == "postTaxSlider");
     }
 
-
+    
     // Display results
     containerApp.style.display = "block";
     
+    // Scroll to top of first section if form was submitted
+    if (triggeringEvent.type == "click" || triggeringEvent.type == "keydown"){
+        window.scrollTo(0, document.querySelector("#userSituation").offsetTop);
+    }
+
     // Use placeholder default values if "Adultes" and "Enfants" are empty
     if (nb_adult.value === ""){
         nb_adult.value = 1;
