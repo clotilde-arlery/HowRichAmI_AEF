@@ -783,10 +783,21 @@ input[type="range"]{
 #postTaxSlider{
     position: absolute;
     z-index: 0;
+    --track-color-1: #c7c7c7;
+    --track-color-2: #dadada;
+    --track-color-3: #eaeaea;
+    --color-change-point-1: 10%;
+    --color-change-point-2: 20%;
 }
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
 input[type="range"]::-webkit-slider-runnable-track {
   background: #d9d9d9;
+  background-image: linear-gradient(
+    to right,
+    var(--track-color-1) 0 var(--color-change-point-1),
+    var(--track-color-2) var(--color-change-point-1) var(--color-change-point-2),
+    var(--track-color-3) var(--color-change-point-2) 100%
+  );
   /* height: 10px; */
   border-radius: 10px;
 }
@@ -796,6 +807,12 @@ input[type="range"]::-moz-range-track {
   background: #d9d9d9;
   /* height: 10px; */
   border-radius: 10px;
+  background-image: linear-gradient(
+    to right,
+    var(--track-color-1) 0 var(--color-change-point-1),
+    var(--track-color-2) var(--color-change-point-1) var(--color-change-point-2),
+    var(--track-color-3) var(--color-change-point-2) 100%
+  );
 }
 
 /***** Thumb Styles *****/
@@ -808,8 +825,10 @@ input[type="range"]::-webkit-slider-thumb {
    height: 20px;
    width: 20px;  
    border-radius: 100%;
-   box-shadow: 0px 0px 0px 5px #00829c7a;  
-   cursor: pointer;
+   --box-shadow-color: #00829c7a;
+   box-shadow: 0px 0px 0px 3px var(--box-shadow-color);
+   cursor: grab;
+   transition: box-shadow 0.2s;
 }
 /***** Firefox *****/
 input[type="range"]::-moz-range-thumb {
@@ -818,8 +837,10 @@ input[type="range"]::-moz-range-thumb {
     background-color: #00829C;
     height: 20px;
     width: 20px;
-    box-shadow: 0px 0px 0px 5px #00829c7a;
-    cursor: pointer;
+    --box-shadow-color: #00829c7a;
+    box-shadow: 0px 0px 0px 3px var(--box-shadow-color);
+    cursor: grab;
+    transition: box-shadow 0.2s;
 }
 /***** Focus Styles *****/
 /* Removes default focus */
@@ -828,38 +849,52 @@ input[type="range"]:focus {
 }
 
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
-input[type="range"]:focus::-webkit-slider-thumb {
-    box-shadow: 0px 0px 0px 5px #00829c7a;
+input[type="range"]::-webkit-slider-thumb:hover {
+    box-shadow: 0px 0px 0px 6px var(--box-shadow-color);
+}
+/******** Firefox ********/
+input[type="range"]::-moz-range-thumb:hover {
+    box-shadow: 0px 0px 0px 6px var(--box-shadow-color);
 }
 
-/******** Firefox ********/
-input[type="range"]:focus::-moz-range-thumb {
-    box-shadow: 0px 0px 0px 5px #00829c7a;
+/***** Chrome, Safari, Opera, and Edge Chromium *****/
+input[type="range"]:active::-webkit-slider-thumb {
+    box-shadow: 0px 0px 0px 9px var(--box-shadow-color);
+    cursor: grabbing;
 }
+/******** Firefox ********/
+input[type="range"]:active::-moz-range-thumb {
+    box-shadow: 0px 0px 0px 9px var(--box-shadow-color);
+    cursor: grabbing;
+}
+
+
 #preTaxSlider::-webkit-slider-runnable-track {
     height: 0px;
 }
-
 /******** Firefox ********/
 #preTaxSlider::-moz-range-track {
     height: 0px;
 }
+
+
 #postTaxSlider::-webkit-slider-runnable-track {
     height: 10px;
 }
-
 /******** Firefox ********/
 #postTaxSlider::-moz-range-track {
     height: 10px;
 }
+
+
 #postTaxSlider::-webkit-slider-thumb{
     background-color: #FFB41A;
-    box-shadow: 0px 0px 0px 5px #ffb31a7c;
+    --box-shadow-color: #ffb31a7c;
     position: -webkit-sticky;
 }
 #postTaxSlider::-moz-range-thumb{
     background-color: #FFB41A;
-    box-shadow: 0px 0px 0px 5px #ffb31a7c;
+    --box-shadow-color: #ffb31a7c;
     position: sticky;
     position: -webkit-sticky;
     initial-value: 10;
@@ -1091,25 +1126,6 @@ code{
         }
         .actionTxt{
             font-size: 14px;
-        }
-	input[type="range"]::-webkit-slider-thumb {
-	        height: 10px;
-	        width: 10px;
-            margin-top: -2px;      /* Re-center thumb on track */
-        }
-        /***** Firefox *****/
-        input[type="range"]::-moz-range-thumb {
-            height: 10px;
-            width: 10px;
-            margin-top: -2px;
-        }
-        #postTaxSlider::-webkit-slider-runnable-track {
-            height: 5px;
-        }
-
-        /******** Firefox ********/
-        #postTaxSlider::-moz-range-track {
-            height: 5px;
         }
 }
 @media (max-width: 350px){
@@ -1920,6 +1936,13 @@ function App(triggeringEvent){
 
         postTaxSlider.value = donationPostTaxPercent;
     }
+
+    // Update slider background color
+    console.log(postTaxSlider.value + "%");
+    postTaxSlider.style.setProperty("--color-change-point-1",
+                                   postTaxSlider.value * 2 + "%");
+    postTaxSlider.style.setProperty("--color-change-point-2",
+                                   preTaxSlider.value * 2 + "%");
 
     // Update text above slider
     txt_postTaxDonation.innerHTML = formatNumber(donationPreTaxPercent) + "%";
