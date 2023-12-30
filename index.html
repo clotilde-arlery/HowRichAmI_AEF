@@ -1139,7 +1139,7 @@ let txt_postTaxDonation = document.getElementById("txt_postTaxDonation");
 let txt_preTaxDonation = document.getElementById("txt_preTaxDonation");
 
 launchButton.addEventListener('click', App);
-initialForm.addEventListener('input', enableLaunchButton);
+initialForm.addEventListener('input', checkLaunchButton);
 document.addEventListener('keydown', launchIfEnterKeyIsPressed);
 range_input.addEventListener('input', App);
 document.onreadystatechange = event => reloadAppOnPageRestoredFromCache(event);
@@ -1156,7 +1156,7 @@ function formValid(){
     return revenu.value != 0 && (nb_adult.value === "" || nb_adult.value != 0);
 }
 
-function enableLaunchButton(){
+function checkLaunchButton(){
     if (formValid()){
         launchButton.style.backgroundColor = "#00829C";
         launchButton.style.cursor = "pointer";
@@ -1204,7 +1204,7 @@ window.addEventListener('resize', App);
 
 function onChangeReload() {
     checkIncomePeriod();
-    enableLaunchButton();
+    checkLaunchButton();
     //App();
 }
 
@@ -1214,7 +1214,7 @@ function toggleDropdown() {
 
 function reloadAppOnPageRestoredFromCache(event) { 
     if (document.readyState == "complete") {
-        enableLaunchButton();
+        checkLaunchButton();
         App(event);
     }
 }
