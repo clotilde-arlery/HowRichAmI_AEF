@@ -174,9 +174,9 @@
             </div>
 
         </section>
-        <section class="donner">
+        <section class="donner" id="donner">
 
-            <h2 class="subject">En donnant <span id="txt_postTaxDonation" class="important_txt">23%</span> de vos revenus, <br>soit <span id="txt_preTaxDonation" class="don_real">10%</span> après réduction d'impôts<a href="#note1" class="footNote">1</a>...</h2>
+            <h2 class="subject">En donnant <span id="txt_postTaxDonation" class="important_txt">23%</span> de vos revenus, <br>soit <span id="txt_preTaxDonation" class="don_real">10%</span> après réduction d'impôts<a href="#notes" class="footNote">1</a>...</h2>
             
             <div id="range_input" class="range_input">
                 <input type="range" name="preTaxSlider" id="preTaxSlider" min="1" max="50" value="10" step="1">
@@ -212,7 +212,7 @@
             <h2 class="subject">...et chaque année, vos <span id="txt_amountDon" class="important_txt">11 136 €</span> de dons<br>
                 (ou <span id="txt_amountDonDefisc" class="don_real">4 800 €</span> après réduction d'impôts)<br>
                 pourraient :</h2>
-            <div class="container_conseqDon">
+            <div class="container_conseqDon" id="impact">
                 <div class="conseqDon">
                     <div class="imageAction">
                         <svg width="110" viewBox="0 0 139 115" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -222,7 +222,7 @@
                     </div>
                     <p class="actionTxt">financer <span id="txt_prixUnitaire_moustiquaire" class="don_real"></span> moustiquaires,<br>et ainsi sauver environ<br>
                         <span id="txt_moustiquaire_vieSauvee" class="don_real info_cle"></span><br>
-                        vies<a href="#note2" class="footNote">2</a></p>
+                        vies<a href="#notes" class="footNote">2</a></p>
                 </div>
                 <div class="conseqDon">
                     <div class="imageAction">
@@ -232,7 +232,7 @@
                     </div>
                     <p class="actionTxt">ou bien, permettre d’éviter<br>
                         <span id="txt_Unitaire_vieEnCage" class="important_txt info_cle"></span><br>
-                        années de vie en cage<a href="#note3" class="footNote">3</a></p>
+                        années de vie en cage<a href="#notes" class="footNote">3</a></p>
                 </div>
                 <div class="conseqDon">
                     <div class="imageAction">
@@ -249,7 +249,7 @@
                         <span id="txt_emissionMoy_fce" class="important_txt"></span>
                         fois les émissions moyennes
                         <br>
-                        d’une personne en France<a href="#note4" class="footNote">4</a>.
+                        d’une personne en France<a href="#notes" class="footNote">4</a>.
                     </p>
                 </div>
             </div>
@@ -275,17 +275,28 @@
             <button class="accordion"><span style="transform:translateY(5px); margin-right:20px;" fill="#546285" class="material-symbols-outlined">
             expand_circle_down
             </span> Notes et méthodologie</button>
-            <div class="panel">
+            <div class="panel" id="notes">
             <p>
                 <br>
                 <h3>Notes</h3>
                 <br>
                 <ol>
-                    <li id="note1">Certaines associations permettent de déduire une partie des dons de vos impôts sur le revenu. Dans ce calculateur, les chiffres en jaune correspondent au cas où vous utilisez la déduction fiscale. Les chiffres en bleu ne tiennent pas compte de cet avantage. </li>
-                    <li id="note2">Selon une <a href='https://docs.google.com/spreadsheets/d/1tytvmV_32H8XGGRJlUzRDTKTHrdevPIYmb_uc6aLeas/edit'>estimation</a> de <a href='https://givewell.org'>GiveWell</a> en 2022, distribuer une moustiquaire contre le paludisme coûte 5$ à <a href='https://www.againstmalaria.com/'>Against Malaria Foundation</a>, et ces moustiquaires empêchent la mort d'une personne au bout de 7&nbsp;185$ en moyenne. </li>
-                    <li id="note3"><a href='https://www.founderspledge.com/downloads/fp-animal-welfare'>Un rapport</a> de <a href='https://www.founderspledge.com/'>Founders Pledge</a> estime en 2018 que chaque dollar donné à <a href='https://thehumaneleague.org/'>The Humane League</a> permet d'éviter 10 ans de vie en cage pour une poule d'élevage intensif. Ce chiffre reste incertain, et ne permet que de donner un ordre de grandeur.</li>
-                    <li id="note4">Dans son évaluation du <a href='https://gfi.org/'>Good Food Institute</a>, <a href='https://www.givinggreen.earth/top-climate-change-nonprofit-donations-recommendations'>Giving Green</a>  <a href='https://www.givinggreen.earth/mitigation-research/the-good-food-institute%3A-deep-dive#viewer-ws855612703'>estime</a> qu'éviter l'émission d'une tonne d'équivalent CO<sub>2</sub> a un coût de l'ordre de 10$. Il s'agit d'un ordre de grandeur, et ce chiffre reste incertain. Pour comparaison, le Ministère de la transition écologique <a href='https://www.statistiques.developpement-durable.gouv.fr/edition-numerique/chiffres-cles-du-climat-2022/donnees-cles'>estime</a> qu'en 2019, un‧e français‧e émet en moyenne 4,8 tonnes de CO<sub>2</sub> par an.</li>
-                    
+                    <li id="note1">
+                        Certaines associations permettent de déduire une partie des dons de vos impôts sur le revenu. Dans ce calculateur, les chiffres en jaune correspondent au cas où vous utilisez la déduction fiscale. Les chiffres en bleu ne tiennent pas compte de cet avantage. 
+                        <a href="#donner"></a>
+                    </li>
+                    <li id="note2">
+                        Selon une <a href='https://docs.google.com/spreadsheets/d/1tytvmV_32H8XGGRJlUzRDTKTHrdevPIYmb_uc6aLeas/edit'>estimation</a> de <a href='https://givewell.org'>GiveWell</a> en 2022, distribuer une moustiquaire contre le paludisme coûte 5$ à <a href='https://www.againstmalaria.com/'>Against Malaria Foundation</a>, et ces moustiquaires empêchent la mort d'une personne au bout de 7&nbsp;185$ en moyenne. 
+                        <a href="#impact"></a>
+                    </li>
+                    <li id="note3">
+                        <a href='https://www.founderspledge.com/downloads/fp-animal-welfare'>Un rapport</a> de <a href='https://www.founderspledge.com/'>Founders Pledge</a> estime en 2018 que chaque dollar donné à <a href='https://thehumaneleague.org/'>The Humane League</a> permet d'éviter 10 ans de vie en cage pour une poule d'élevage intensif. Ce chiffre reste incertain, et ne permet que de donner un ordre de grandeur. 
+                        <a href="#impact"></a>
+                    </li>
+                    <li id="note4">
+                        Dans son évaluation du <a href='https://gfi.org/'>Good Food Institute</a>, <a href='https://www.givinggreen.earth/top-climate-change-nonprofit-donations-recommendations'>Giving Green</a>  <a href='https://www.givinggreen.earth/mitigation-research/the-good-food-institute%3A-deep-dive#viewer-ws855612703'>estime</a> qu'éviter l'émission d'une tonne d'équivalent CO<sub>2</sub> a un coût de l'ordre de 10$. Il s'agit d'un ordre de grandeur, et ce chiffre reste incertain. Pour comparaison, le Ministère de la transition écologique <a href='https://www.statistiques.developpement-durable.gouv.fr/edition-numerique/chiffres-cles-du-climat-2022/donnees-cles'>estime</a> qu'en 2019, un‧e français‧e émet en moyenne 4,8 tonnes de CO<sub>2</sub> par an.
+                    <a href="#impact"></a>
+                    </li>
                     </ol>
                     <br/>
                     <h3 id='vos-données'>Vos données</h3>
@@ -315,7 +326,6 @@
 }
 html{
     box-sizing: border-box;
-    scroll-behavior: smooth;
 }
 /* Firefox */
 input[type="number"] {
@@ -956,6 +966,16 @@ input[type="range"]:focus::-moz-range-thumb {
 a {
     color: #35b8be;
 }
+
+/* Footnote backlinks */
+#notes li > a:last-of-type[href^="#"] {
+    text-decoration: none;
+}
+#notes li > a:last-of-type[href^="#"]::after {
+    content: "↑";
+    color: #767676;
+}
+
 section.methodo ol {
     padding-left: 50px;
 }
@@ -1793,9 +1813,11 @@ function App(triggeringEvent){
     // Display results
     containerApp.style.display = "block";
     
-    // Scroll to top of first section if form was submitted
+    // Scroll smoothly to top of first section if form was submitted
     if (triggeringEvent.type == "click" || triggeringEvent.type == "keydown"){
+        document.querySelector("html").style.scrollBehavior = "smooth";
         window.scrollTo(0, document.querySelector("#userSituation").offsetTop);
+        document.querySelector("html").style.scrollBehavior = "auto";
     }
 
     // Use placeholder default values if "Adultes" and "Enfants" are empty
