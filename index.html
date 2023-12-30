@@ -810,7 +810,7 @@ input[type="range"]::-webkit-slider-thumb {
    border-radius: 100%;
    --box-shadow-color: #00829c7a;
    box-shadow: 0px 0px 0px 3px var(--box-shadow-color);
-   cursor: pointer;
+   cursor: grab;
    transition: box-shadow 0.2s;
 }
 /***** Firefox *****/
@@ -822,7 +822,7 @@ input[type="range"]::-moz-range-thumb {
     width: 20px;
     --box-shadow-color: #00829c7a;
     box-shadow: 0px 0px 0px 3px var(--box-shadow-color);
-    cursor: pointer;
+    cursor: grab;
     transition: box-shadow 0.2s;
 }
 /***** Focus Styles *****/
@@ -843,10 +843,12 @@ input[type="range"]::-moz-range-thumb:hover {
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
 input[type="range"]:active::-webkit-slider-thumb {
     box-shadow: 0px 0px 0px 9px var(--box-shadow-color);
+    cursor: grabbing;
 }
 /******** Firefox ********/
 input[type="range"]:active::-moz-range-thumb {
     box-shadow: 0px 0px 0px 9px var(--box-shadow-color);
+    cursor: grabbing;
 }
 
 
