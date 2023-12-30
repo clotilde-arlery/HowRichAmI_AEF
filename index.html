@@ -783,10 +783,21 @@ input[type="range"]{
 #postTaxSlider{
     position: absolute;
     z-index: 0;
+    --track-color-1: #c7c7c7;
+    --track-color-2: #dadada;
+    --track-color-3: #eaeaea;
+    --color-change-point-1: 10%;
+    --color-change-point-2: 20%;
 }
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
 input[type="range"]::-webkit-slider-runnable-track {
   background: #d9d9d9;
+  background-image: linear-gradient(
+    to right,
+    var(--track-color-1) 0 var(--color-change-point-1),
+    var(--track-color-2) var(--color-change-point-1) var(--color-change-point-2),
+    var(--track-color-3) var(--color-change-point-2) 100%
+  );
   /* height: 10px; */
   border-radius: 10px;
 }
@@ -796,6 +807,12 @@ input[type="range"]::-moz-range-track {
   background: #d9d9d9;
   /* height: 10px; */
   border-radius: 10px;
+  background-image: linear-gradient(
+    to right,
+    var(--track-color-1) 0 var(--color-change-point-1),
+    var(--track-color-2) var(--color-change-point-1) var(--color-change-point-2),
+    var(--track-color-3) var(--color-change-point-2) 100%
+  );
 }
 
 /***** Thumb Styles *****/
@@ -1919,6 +1936,13 @@ function App(triggeringEvent){
 
         postTaxSlider.value = donationPostTaxPercent;
     }
+
+    // Update slider background color
+    console.log(postTaxSlider.value + "%");
+    postTaxSlider.style.setProperty("--color-change-point-1",
+                                   postTaxSlider.value * 2 + "%");
+    postTaxSlider.style.setProperty("--color-change-point-2",
+                                   preTaxSlider.value * 2 + "%");
 
     // Update text above slider
     txt_postTaxDonation.innerHTML = formatNumber(donationPreTaxPercent) + "%";
