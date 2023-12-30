@@ -32,8 +32,18 @@
             <!-- <div class="income_input_container"> -->
                 <div class="form__group">
                     
-                    <input type="number" class="form__field" placeholder="Name" name="name" id='name' required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/><span class="devise">€</span>
-                    <label for="name" class="form__label">Revenu</label>
+                    <input 
+                        type="number"
+                        class="form__field"
+                        placeholder=" "
+                        name="income"
+                        id='income'
+                        required
+                        title=""
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                    />
+                    <span class="devise">€</span>
+                    <label for="income" class="form__label">Revenu</label>
     
                     
                     <div class="income_period">
@@ -62,13 +72,31 @@
                 </div>
                 <div class="split_form_group">
                     <div class="relative_famille">
-                        <p class="field_desc">Nombre d'adultes dans votre ménage</p>
-                        <input type="number" class="nb_adult" placeholder="1" name="adult" id='nb_adult' required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                        <p class="field_desc">Personnes de 14 ans ou plus</p>
+                        <input
+                            type="number"
+                            class="nb_adult"
+                            placeholder="1"
+                            name="adult"
+                            id='nb_adult'
+                            required
+                            title=""
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        />
                         <label for="nb_adult" class="nb_adult_label">Adultes</label>
                     </div>
                     <div class="relative_famille">
                         <p class="field_desc">Personnes de moins de 14 ans</p>
-                        <input type="number" class="nb_children" placeholder="0" name="children" id='nb_children' required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                        <input
+                            type="number"
+                            class="nb_children"
+                            placeholder="0"
+                            name="children"
+                            id='nb_children'
+                            required
+                            title=""
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        />
                         <label for="nb_children" class="nb_children_label">Enfants</label>
                     </div>
                 </div>
@@ -287,6 +315,7 @@
 }
 html{
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 /* Firefox */
 input[type="number"] {
@@ -548,6 +577,10 @@ section.income_position > h2.subject {
 
 form input {
     border-radius: 0px; /* Prevent iOS Safari default 5px border radius */
+}
+
+form input:focus::placeholder {
+  visibility: hidden;
 }
 
 .split_form_group{
@@ -1107,14 +1140,15 @@ let txt_postTaxDonation = document.getElementById("txt_postTaxDonation");
 let txt_preTaxDonation = document.getElementById("txt_preTaxDonation");
 
 launchButton.addEventListener('click', App);
-initialForm.addEventListener('input', enableLaunchButton);
+initialForm.addEventListener('input', checkLaunchButton);
 document.addEventListener('keydown', launchIfEnterKeyIsPressed);
 range_input.addEventListener('input', App);
+document.onreadystatechange = event => reloadAppOnPageRestoredFromCache(event);
 
 preTaxSlider.value = 10;
 
 /* Init form */
-let revenu = document.getElementById('name');
+let revenu = document.getElementById('income');
 let nb_adult = document.getElementById('nb_adult');
 let nb_children= document.getElementById('nb_children');
 
@@ -1123,7 +1157,7 @@ function formValid(){
     return revenu.value != 0 && (nb_adult.value === "" || nb_adult.value != 0);
 }
 
-function enableLaunchButton(){
+function checkLaunchButton(){
     if (formValid()){
         launchButton.style.backgroundColor = "#00829C";
         launchButton.style.cursor = "pointer";
@@ -1171,7 +1205,7 @@ window.addEventListener('resize', App);
 
 function onChangeReload() {
     checkIncomePeriod();
-    enableLaunchButton();
+    checkLaunchButton();
     //App();
 }
 
@@ -1179,7 +1213,12 @@ function toggleDropdown() {
   document.getElementById("income_period_dropdown").classList.toggle("show");
 }
 
-
+function reloadAppOnPageRestoredFromCache(event) { 
+    if (document.readyState == "complete") {
+        checkLaunchButton();
+        App(event);
+    }
+}
 
 // Close the dropdown if the user clicks outside of it
 container_dropdownperiod.addEventListener("click", toggleDropdown);
@@ -1750,10 +1789,15 @@ function App(triggeringEvent){
         inputIsPostTax = (inputName == "postTaxSlider");
     }
 
-
+    
     // Display results
     containerApp.style.display = "block";
     
+    // Scroll to top of first section if form was submitted
+    if (triggeringEvent.type == "click" || triggeringEvent.type == "keydown"){
+        window.scrollTo(0, document.querySelector("#userSituation").offsetTop);
+    }
+
     // Use placeholder default values if "Adultes" and "Enfants" are empty
     if (nb_adult.value === ""){
         nb_adult.value = 1;
