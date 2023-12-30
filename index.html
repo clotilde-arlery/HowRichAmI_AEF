@@ -808,7 +808,8 @@ input[type="range"]::-webkit-slider-thumb {
    height: 20px;
    width: 20px;  
    border-radius: 100%;
-   box-shadow: 0px 0px 0px 5px #00829c7a;  
+   --box-shadow-color: #00829c7a;
+   box-shadow: 0px 0px 0px 5px var(--box-shadow-color);
    cursor: pointer;
 }
 /***** Firefox *****/
@@ -818,7 +819,8 @@ input[type="range"]::-moz-range-thumb {
     background-color: #00829C;
     height: 20px;
     width: 20px;
-    box-shadow: 0px 0px 0px 5px #00829c7a;
+    --box-shadow-color: #00829c7a;
+    box-shadow: 0px 0px 0px 5px var(--box-shadow-color);
     cursor: pointer;
 }
 /***** Focus Styles *****/
@@ -854,12 +856,12 @@ input[type="range"]:focus::-moz-range-thumb {
 }
 #postTaxSlider::-webkit-slider-thumb{
     background-color: #FFB41A;
-    box-shadow: 0px 0px 0px 5px #ffb31a7c;
+    --box-shadow-color: #ffb31a7c;
     position: -webkit-sticky;
 }
 #postTaxSlider::-moz-range-thumb{
     background-color: #FFB41A;
-    box-shadow: 0px 0px 0px 5px #ffb31a7c;
+    --box-shadow-color: #ffb31a7c;
     position: sticky;
     position: -webkit-sticky;
     initial-value: 10;
