@@ -1142,6 +1142,7 @@ launchButton.addEventListener('click', App);
 initialForm.addEventListener('input', enableLaunchButton);
 document.addEventListener('keydown', launchIfEnterKeyIsPressed);
 range_input.addEventListener('input', App);
+document.onreadystatechange = event => reloadAppOnPageRestoredFromCache(event);
 
 preTaxSlider.value = 10;
 
@@ -1211,7 +1212,12 @@ function toggleDropdown() {
   document.getElementById("income_period_dropdown").classList.toggle("show");
 }
 
-
+function reloadAppOnPageRestoredFromCache(event) { 
+    if (document.readyState == "complete") {
+        enableLaunchButton();
+        App(event);
+    }
+}
 
 // Close the dropdown if the user clicks outside of it
 container_dropdownperiod.addEventListener("click", toggleDropdown);
