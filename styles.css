@@ -126,19 +126,30 @@ section.income_position > h2.subject {
     cursor: pointer;
     position: relative;
 }
-#calculerSituation{
+input[type="button"]#calculer {
+    background-color: var(--primary);
+    cursor: pointer;
+
+    color: #fff;
     margin-top: 60px;
     margin-bottom: 20px;
-    background-color: #d9d9d9;
-    color: #fff;
     font-size: 18px;
     border-color: transparent;
     padding: 7px 30px 7px 30px;
     border-radius: 35px;
     align-self: center;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px;
+    transition: opacity 0.3s;
 }
 
+input[type="button"]#calculer:disabled {
+    background-color: #d9d9d9;
+    cursor: default;
+}
+
+input[type="button"]#calculer:not(:disabled):hover {
+    opacity: 0.93;
+}
 
 /* Input revenu */
 .devise{
