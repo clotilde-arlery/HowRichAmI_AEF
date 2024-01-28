@@ -22,6 +22,10 @@ document.onreadystatechange = event => reloadAppOnPageRestoredFromCache(event);
 
 preTaxSlider.value = 10;
 
+/* Insert navbar and footer */
+$('#navbarContainer').load('https://www.altruismeefficacefrance.org/ #Navigation');
+$('#footerContainer').load('https://www.altruismeefficacefrance.org/ div.footer');
+
 /* Init form */
 let revenu = document.getElementById('income');
 let nb_adult = document.getElementById('nb_adult');
