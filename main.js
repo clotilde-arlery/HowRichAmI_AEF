@@ -34,7 +34,7 @@ function formValid(){
 
 function checkLaunchButton(){
     if (formValid()){
-        launchButton.style.backgroundColor = "#00829C";
+        launchButton.style.backgroundColor = "var(--primary)";
         launchButton.style.cursor = "pointer";
     }
     else{
