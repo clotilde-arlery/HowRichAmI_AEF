@@ -2,9 +2,22 @@
     padding: 0;
     margin: 0;
 }
+
 html{
     box-sizing: border-box;
 }
+
+/* global variables */
+body {
+    /* Color variables */
+    --primary: #0C869B;
+    --primary-transparent: #0C869B7A;
+    --primary-lighter: #35b8be;
+    
+    --secondary: #FFB41A;
+    --secondary-transparent: #ffb31a7c;
+}
+
 /* Firefox */
 input[type="number"] {
     -webkit-appearance: textfield;
@@ -27,11 +40,11 @@ body{
     background-color : #ffffff;
 }
 .important_txt{
-    color: #00829C;
+    color: var(--primary);
     font-weight: 500;
 }
 .don_real{
-    color: #FFB41A;
+    color: var(--secondary);
     font-weight: 500;
 }
 .banner{
@@ -39,7 +52,7 @@ body{
     /* width: 100%; */
     padding: 60px 0px;
     text-align: center;
-    background-color: #00829C;
+    background-color: var(--primary);
     font-size: 24px;
 }
 .userSituation{
@@ -109,23 +122,34 @@ section.income_position > h2.subject {
     cursor: pointer;
 }
 #container_dropdownperiod{
-    color: #00829C;
+    color: var(--primary);
     cursor: pointer;
     position: relative;
 }
-#calculerSituation{
+input[type="button"]#calculer {
+    background-color: var(--primary);
+    cursor: pointer;
+
+    color: #fff;
     margin-top: 60px;
     margin-bottom: 20px;
-    background-color: #d9d9d9;
-    color: #fff;
     font-size: 18px;
     border-color: transparent;
     padding: 7px 30px 7px 30px;
     border-radius: 35px;
     align-self: center;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px;
+    transition: opacity 0.3s;
 }
 
+input[type="button"]#calculer:disabled {
+    background-color: #d9d9d9;
+    cursor: default;
+}
+
+input[type="button"]#calculer:not(:disabled):hover {
+    opacity: 0.93;
+}
 
 /* Input revenu */
 .devise{
@@ -357,7 +381,7 @@ form input:focus::placeholder {
     
     width: 75%;
     height: 100%;
-    background-color: #37B9BF;
+    background-color: var(--primary-lighter);
     border-right: 3px dashed #000;
 }
 .poorer_position{
@@ -372,7 +396,7 @@ form input:focus::placeholder {
 .txt_poorer_position{
     white-space: nowrap;
     font-size: 14px;
-    /* color: #37B9BF; */
+    /* color: var(--primary-lighter); */
 }
 .txt_your_position{
     white-space: nowrap;
@@ -389,7 +413,7 @@ form input:focus::placeholder {
 .poor_arrow{
     transform: translate(50%, -5px);
     display: block;
-    color: #37B9BF;
+    color: var(--primary-lighter);
 }
 .your_arrow{
     transform: translate(20%, 5px);
@@ -416,17 +440,17 @@ form input:focus::placeholder {
 .compare_barYou{
     width: 75%;
     height: 30px;
-    background-color: #37B9BF;
+    background-color: var(--primary-lighter);
 }
 .compare_barMedian{
     width: 20%;
     height: 30px;
-    background-color: #37B9BF;
+    background-color: var(--primary-lighter);
 }
 .compare_barPoor{
     width: 2%;
     height: 30px;
-    background-color: #37B9BF;
+    background-color: var(--primary-lighter);
 }
 .compare_txt{
     margin-left: 20px;
@@ -500,12 +524,12 @@ input[type="range"]::-webkit-slider-thumb {
    -webkit-appearance: none; /* Override default look */
    appearance: none;
    margin-top: -5px; /* Centers thumb on the track */
-   background-color: #00829C;
+   background-color: var(--primary);
    height: 20px;
    width: 20px;  
    border-radius: 100%;
-   --box-shadow-color: #00829c7a;
-   box-shadow: 0px 0px 0px 3px var(--box-shadow-color);
+   --halo-color: var(--primary-transparent);
+   box-shadow: 0px 0px 0px 3px var(--halo-color);
    cursor: grab;
    transition: box-shadow 0.2s;
 }
@@ -513,11 +537,11 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"]::-moz-range-thumb {
     border: none; /*Removes extra border that FF applies*/
     border-radius: 100%; /*Removes default border-radius that FF applies*/
-    background-color: #00829C;
+    background-color: var(--primary);
     height: 20px;
     width: 20px;
-    --box-shadow-color: #00829c7a;
-    box-shadow: 0px 0px 0px 3px var(--box-shadow-color);
+    --halo-color: var(--primary-transparent);
+    box-shadow: 0px 0px 0px 3px var(--halo-color);
     cursor: grab;
     transition: box-shadow 0.2s;
 }
@@ -529,21 +553,21 @@ input[type="range"]:focus {
 
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
 input[type="range"]::-webkit-slider-thumb:hover {
-    box-shadow: 0px 0px 0px 6px var(--box-shadow-color);
+    box-shadow: 0px 0px 0px 6px var(--halo-color);
 }
 /******** Firefox ********/
 input[type="range"]::-moz-range-thumb:hover {
-    box-shadow: 0px 0px 0px 6px var(--box-shadow-color);
+    box-shadow: 0px 0px 0px 6px var(--halo-color);
 }
 
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
 input[type="range"]:active::-webkit-slider-thumb {
-    box-shadow: 0px 0px 0px 9px var(--box-shadow-color);
+    box-shadow: 0px 0px 0px 9px var(--halo-color);
     cursor: grabbing;
 }
 /******** Firefox ********/
 input[type="range"]:active::-moz-range-thumb {
-    box-shadow: 0px 0px 0px 9px var(--box-shadow-color);
+    box-shadow: 0px 0px 0px 9px var(--halo-color);
     cursor: grabbing;
 }
 
@@ -573,13 +597,13 @@ input[type="range"]:active::-moz-range-thumb {
 }
 
 #postTaxSlider::-webkit-slider-thumb{
-    background-color: #FFB41A;
-    --box-shadow-color: #ffb31a7c;
+    background-color: var(--secondary);
+    --halo-color: var(--secondary-transparent);
     position: -webkit-sticky;
 }
 #postTaxSlider::-moz-range-thumb{
-    background-color: #FFB41A;
-    --box-shadow-color: #ffb31a7c;
+    background-color: var(--secondary);
+    --halo-color: var(--secondary-transparent);
     position: sticky;
     position: -webkit-sticky;
     initial-value: 10;
@@ -637,7 +661,7 @@ input[type="range"]:active::-moz-range-thumb {
 .callToAction_button{
     text-decoration: none;
     margin-top: 20px;
-    background-color: #00829C;
+    background-color: var(--primary);
     color: #fff;
     font-size: 18px;
     border-color: transparent;
@@ -684,7 +708,7 @@ input[type="range"]:active::-moz-range-thumb {
   color: #767676;
 }
 a {
-    color: #35b8be;
+    color: var(--primary-lighter);
 }
 
 /* Footnote backlinks */

@@ -5,7 +5,7 @@ var mensuel_label = document.getElementById("mensuel_label");
 var income_period = document.getElementById("income_period");
 var container_dropdownperiod = document.getElementById("container_dropdownperiod");
 let initialForm = document.getElementById('initialForm');
-let launchButton = document.getElementById('calculerSituation');
+let launchButton = document.getElementById('calculer');
 let containerApp = document.getElementById('containerApp');
 let yearlyIncome;
 let preTaxSlider = document.getElementById("preTaxSlider");
@@ -22,6 +22,10 @@ document.onreadystatechange = event => reloadAppOnPageRestoredFromCache(event);
 
 preTaxSlider.value = 10;
 
+/* Insert navbar and footer */
+$('#navbarContainer').load('https://www.altruismeefficacefrance.org/ #Navigation');
+$('#footerContainer').load('https://www.altruismeefficacefrance.org/ div.footer');
+
 /* Init form */
 let revenu = document.getElementById('income');
 let nb_adult = document.getElementById('nb_adult');
@@ -33,13 +37,11 @@ function formValid(){
 }
 
 function checkLaunchButton(){
-    if (formValid()){
-        launchButton.style.backgroundColor = "#00829C";
-        launchButton.style.cursor = "pointer";
+    if (!formValid()){
+        launchButton.setAttribute("disabled", "");
     }
     else{
-        launchButton.style.backgroundColor = "#d9d9d9";
-        launchButton.style.cursor = "default";
+        launchButton.removeAttribute("disabled");
     }
 }
 
