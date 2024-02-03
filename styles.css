@@ -609,7 +609,7 @@ input[type="range"]:active::-moz-range-thumb {
     initial-value: 10;
 }
 .legend{
-    width: 100%;
+    width: 102%;
     list-style-type: none;
     display: flex;
     flex-direction: row;
@@ -618,6 +618,32 @@ input[type="range"]:active::-moz-range-thumb {
     color: #767676;
     font-size: 14px;
 }
+
+/* Tickmarks */
+.legend li::before {
+    content: "";
+    display: block;
+    position: relative;
+    top: -4px;
+    left: +8px;
+    height: 7px;
+    width: 1px;
+    background-color: #767676;
+}
+
+.legend li:first-of-type {
+    position: relative;
+    left: 5px;
+}
+.legend li:first-of-type::before {
+    left: +3px;
+}
+
+.legend li:last-of-type {
+    position: relative;
+    left: -2px;
+}
+
 .donner_graphActu{
     margin-bottom: 30px;
 }
