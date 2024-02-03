@@ -486,8 +486,8 @@ input[type="range"]{
 #postTaxSlider{
     position: absolute;
     z-index: 0;
-    --track-color-1: #c7c7c7;
-    --track-color-2: #dadada;
+    --track-color-1: #888888;
+    --track-color-2: #b8b8b8;
     --track-color-3: #eaeaea;
     --color-change-point-1: 10%;
     --color-change-point-2: 20%;
