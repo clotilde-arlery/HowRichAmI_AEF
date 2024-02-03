@@ -630,6 +630,7 @@ input[type="range"]:active::-moz-range-thumb {
 }
 #postTaxSlider ~ svg {
     margin-top: 2px;
+    height: 10px;
 }
 #postTaxSlider ~ ul {
     margin-top: 5px;
