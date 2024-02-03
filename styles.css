@@ -609,39 +609,27 @@ input[type="range"]:active::-moz-range-thumb {
     initial-value: 10;
 }
 .legend{
-    width: 102%;
+    width: 100%;
     list-style-type: none;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    transform: translateY(30px);
+    transform: translate(0,30px);
     color: #767676;
     font-size: 14px;
 }
 
 /* Tickmarks */
-.legend li::before {
-    content: "";
-    display: block;
-    position: relative;
-    top: -4px;
-    left: +8px;
+#postTaxSlider ~ svg > rect {
+    fill: #767676;
     height: 7px;
     width: 1px;
-    background-color: #767676;
 }
-
-.legend li:first-of-type {
-    position: relative;
-    left: 5px;
+#postTaxSlider ~ svg {
+    margin-top: 2px;
 }
-.legend li:first-of-type::before {
-    left: +3px;
-}
-
-.legend li:last-of-type {
-    position: relative;
-    left: -2px;
+#postTaxSlider ~ ul {
+    margin-top: 5px;
 }
 
 .donner_graphActu{
