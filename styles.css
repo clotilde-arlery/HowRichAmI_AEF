@@ -724,6 +724,17 @@ section#notes[collapsed] > div#notesContent {
     display: none;
 }
 
+section#notes > button > span.material-symbols-outlined {
+    position:relative;
+    top: 5px;
+    margin-right:20px;
+    transition: transform 0.15s;
+}
+
+section#notes[collapsed] > button > span.material-symbols-outlined {
+    transform: rotate(-90deg);
+}
+
 a {
     color: var(--primary-lighter);
 }
