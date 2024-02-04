@@ -93,19 +93,55 @@ function reloadAppOnPageRestoredFromCache(event) {
     }
 }
 
+
+function enableSmoothScrolling() {
+    document.querySelector("html").style.scrollBehavior = "smooth";
+}
+function disableSmoothScrolling() {
+    document.querySelector("html").style.scrollBehavior = "auto";
+}
+
+
 // Close the dropdown if the user clicks outside of it
 container_dropdownperiod.addEventListener("click", toggleDropdown);
 annuel_label.addEventListener("click", toggleDropdown);
 mensuel_label.addEventListener("click", toggleDropdown);
 
 /* Collapsable footnote section */
+var notesSection = document.querySelector("section#notes");
+
 function toggleCollapseNotes() {
-    var footnotesSection = document.querySelector("section#notes");
-    footnotesSection.toggleAttribute("collapsed");
+    notesSection.toggleAttribute("collapsed");
 }
 
+function collapseNotes() {
+    notesSection.setAttribute("collapsed", "");
+}
+
+function expandNotes() {
+    notesSection.removeAttribute("collapsed");
+    console.log(notesSection)
+}
+
+function collapseNotesIfNotInView() {
+    windowBottom = window.scrollY + window.innerHeight;
+    notesIsNotInView = windowBottom < notesSection.offsetTop;
+    if (notesIsNotInView){
+        collapseNotes();
+    }
+}
+
+// Event listeners for notes section
 var toggleNotesButton = document.querySelector("button#toggleNotes");
 toggleNotesButton.addEventListener("click", toggleCollapseNotes);
+
+document.addEventListener('scroll', collapseNotesIfNotInView);
+
+footnoteLinks = document.querySelectorAll("a.footNote");
+for(var i = 0; i < footnoteLinks.length; i++) {
+    footnoteLinks[i].addEventListener('click', expandNotes);
+}
+
 
 /* App secundary functions */
 function formatNumber(x, roundToUnit=false){
@@ -255,9 +291,9 @@ function App(triggeringEvent){
     
     // Scroll smoothly to top of first section if form was submitted
     if (triggeringEvent.type == "click" || triggeringEvent.type == "keydown"){
-        document.querySelector("html").style.scrollBehavior = "smooth";
+        enableSmoothScrolling();
         window.scrollTo(0, document.querySelector("#userSituation").offsetTop);
-        document.querySelector("html").style.scrollBehavior = "auto";
+        disableSmoothScrolling();
     }
 
     // Use placeholder default values if "Adultes" and "Enfants" are empty
