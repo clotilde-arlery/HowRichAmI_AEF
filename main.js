@@ -138,7 +138,8 @@ toggleNotesButton.addEventListener("click", toggleCollapseNotes);
 document.addEventListener('scroll', collapseNotesIfNotInView);
 
 footnoteLinks = document.querySelectorAll("a.footNote");
-for(var i = 0; i < footnoteLinks.length; i++) {
+for(i in footnoteLinks) {
+    console.log(footnoteLinks[i]);
     footnoteLinks[i].addEventListener('click', expandNotes);
 }
 
@@ -273,7 +274,7 @@ function App(triggeringEvent){
     let txt_pourN = document.getElementById('txt_pourN');
     let txt_revenu = document.getElementById('txt_revenu');
     let txt_nbMenage = document.getElementById('txt_nbMenage');
-    let txt_pourcentagePosition = document.getElementById('txt_pourcentagePosition');
+    let positionPercentSpans = document.querySelectorAll('span.positionPercent');
     let individual_income_position;
 
     let inputIsPostTax;
@@ -338,7 +339,11 @@ function App(triggeringEvent){
     //console.log(percentile);
     pourcentage_position = 100 - percentile;
     console.log("pourcentage position : ", pourcentage_position);
-    txt_pourcentagePosition.innerHTML = formatNumber(pourcentage_position) + "%";
+
+    let percentString = formatNumber(pourcentage_position) + "%";
+    for (i in positionPercentSpans) {
+        positionPercentSpans[i].innerHTML = percentString;
+    }
     let graph_container = document.getElementById('graph_container');
     let income_position_bar = document.getElementById('income_position_bar');
     let graph_width = graph_container.clientWidth;
@@ -455,7 +460,7 @@ function App(triggeringEvent){
     txt_emissionMoy_fce.innerHTML = formatNumber(don_emissionMoy_fce, roundToUnit=true);
 
     let privilegie;
-    if (ajusted_income <= revenuMedian){
+    if (percentile < 70){
         privilegie = false;
     }
     else{
