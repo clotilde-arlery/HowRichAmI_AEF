@@ -100,12 +100,8 @@ mensuel_label.addEventListener("click", toggleDropdown);
 
 /* Collapsable footnote section */
 function toggleCollapseNotes() {
-    var notes = document.querySelector("section.methodo > .panel");
-    if (notes.style.display === "block") {
-        notes.style.display = "none";
-    } else {
-        notes.style.display = "block";
-    }
+    var footnotesSection = document.querySelector("section#notes");
+    footnotesSection.toggleAttribute("collapsed");
 }
 
 var toggleNotesButton = document.querySelector("button#toggleNotes");

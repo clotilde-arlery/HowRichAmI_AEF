@@ -688,10 +688,10 @@ input[type="range"]:active::-moz-range-thumb {
     align-self: center;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px;
 }
-.methodo{
+#notes{
     padding: 50px;
 }
-#toggleNotes {
+button#toggleNotes {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -709,7 +709,7 @@ input[type="range"]:active::-moz-range-thumb {
   border-bottom: 1px solid #333;
 }
 
-section.methodo > .panel {
+section#notes > div#notesContent {
   padding: 0 18px;
   line-height: 1.5;
   text-align: justify;
@@ -719,23 +719,28 @@ section.methodo > .panel {
   overflow: hidden;
   color: #767676;
 }
+
+section#notes[collapsed] > div#notesContent {
+    display: none;
+}
+
 a {
     color: var(--primary-lighter);
 }
 
 /* Footnote backlinks */
-#notes li > a:last-of-type[href^="#"] {
+section#notes li > a:last-of-type[href^="#"] {
     text-decoration: none;
 }
-#notes li > a:last-of-type[href^="#"]::after {
+section#notes li > a:last-of-type[href^="#"]::after {
     content: "↑";
     color: #767676;
 }
 
-section.methodo ol {
+section#notes ol {
     padding-left: 50px;
 }
-section.methodo ul {
+section#notes ul {
     padding-left: 30px;
 }
 .footNote{
