@@ -93,30 +93,55 @@ function reloadAppOnPageRestoredFromCache(event) {
     }
 }
 
+
+function enableSmoothScrolling() {
+    document.querySelector("html").style.scrollBehavior = "smooth";
+}
+function disableSmoothScrolling() {
+    document.querySelector("html").style.scrollBehavior = "auto";
+}
+
+
 // Close the dropdown if the user clicks outside of it
 container_dropdownperiod.addEventListener("click", toggleDropdown);
 annuel_label.addEventListener("click", toggleDropdown);
 mensuel_label.addEventListener("click", toggleDropdown);
 
-/* Dropdown méthodo */
-var acc = document.getElementsByClassName("accordion");
-var i;
+/* Collapsable footnote section */
+var notesSection = document.querySelector("section#notes");
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    /* Toggle between adding and removing the "active" class,
-    to highlight the button that controls the panel */
-    
+function toggleCollapseNotes() {
+    notesSection.toggleAttribute("collapsed");
+}
 
-    /* Toggle between hiding and showing the active panel */
-    var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
+function collapseNotes() {
+    notesSection.setAttribute("collapsed", "");
+}
+
+function expandNotes() {
+    notesSection.removeAttribute("collapsed");
+    console.log(notesSection)
+}
+
+function collapseNotesIfNotInView() {
+    windowBottom = window.scrollY + window.innerHeight;
+    notesIsNotInView = windowBottom < notesSection.offsetTop;
+    if (notesIsNotInView){
+        collapseNotes();
     }
-  });
-} 
+}
+
+// Event listeners for notes section
+var toggleNotesButton = document.querySelector("button#toggleNotes");
+toggleNotesButton.addEventListener("click", toggleCollapseNotes);
+
+document.addEventListener('scroll', collapseNotesIfNotInView);
+
+footnoteLinks = document.querySelectorAll("a.footNote");
+for(var i = 0; i < footnoteLinks.length; i++) {
+    footnoteLinks[i].addEventListener('click', expandNotes);
+}
+
 
 /* App secundary functions */
 function formatNumber(x, roundToUnit=false){
@@ -266,9 +291,9 @@ function App(triggeringEvent){
     
     // Scroll smoothly to top of first section if form was submitted
     if (triggeringEvent.type == "click" || triggeringEvent.type == "keydown"){
-        document.querySelector("html").style.scrollBehavior = "smooth";
+        enableSmoothScrolling();
         window.scrollTo(0, document.querySelector("#userSituation").offsetTop);
-        document.querySelector("html").style.scrollBehavior = "auto";
+        disableSmoothScrolling();
     }
 
     // Use placeholder default values if "Adultes" and "Enfants" are empty
