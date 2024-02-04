@@ -371,24 +371,23 @@ form input:focus::placeholder {
     
 }
 .graph_container{
+    display: flex;
     margin-top: 40px;
     width: 50%;
-    height: 70px;
+    height: 50px;
     background-color: #d9d9d9;
 }
 .income_position_bar{
     position: relative;
-    
-    width: 75%;
+    width: 25%;
     height: 100%;
     background-color: var(--primary-lighter);
-    border-right: 3px dashed #000;
+    border-left: 3px dashed #000;
 }
 .poorer_position{
-    position: absolute;
+    position: relative;
     left: 0;
-    bottom: 0;
-    transform: translate(0, 60px);
+    top: 60px;
     word-wrap: none;
     flex-wrap: nowrap;
     overflow-y: visible;
@@ -399,19 +398,17 @@ form input:focus::placeholder {
     white-space: nowrap;
     font-size: 14px;
     margin: auto;
-    /* color: var(--primary-lighter); */
+    position: relative;
 }
 .txt_your_position{
     white-space: nowrap;
     font-size: 14px;
 }
 .your_position{
-    position: absolute;
-    right: 0;
-    top: 0;
+    position: relative;
+    right: 19px;
+    top: -50px;
     overflow-y: visible;
-    transform: translate(50%, -60px);
-    /* transform: translate(50%, -60px); */
 }
 .poor_arrow{
     transform: translate(50%, -5px);
@@ -791,8 +788,6 @@ code{
         
         .graph_container{
             width: 70%;
-            height: 50px;
-
         }
         .subject{
             font-size: 15px;

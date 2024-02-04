@@ -342,7 +342,7 @@ function App(triggeringEvent){
     let graph_container = document.getElementById('graph_container');
     let income_position_bar = document.getElementById('income_position_bar');
     let graph_width = graph_container.clientWidth;
-    income_position_bar.style.width = ((percentile/100)*graph_width).toString()+"px";
+    income_position_bar.style.width = ((1 - percentile/100)*graph_width).toString()+"px";
     let revenuMedian = 6499.6;
     
     let timesRevenuMedian = ajusted_income/revenuMedian;
@@ -418,7 +418,7 @@ function App(triggeringEvent){
     let graph_containerPD = document.getElementById('graph_containerPD');
     let income_position_barPD = document.getElementById('income_position_barPD');
     let graph_widthPD = graph_containerPD.clientWidth;
-    income_position_barPD.style.width = ((percentilePostDon/100)*graph_widthPD).toString()+"px";
+    income_position_barPD.style.width = ((1 - percentilePostDon/100)*graph_widthPD).toString()+"px";
 
     let txt_amountDon = document.getElementById("txt_amountDon");
     let txt_amountDonDefisc = document.getElementById("txt_amountDonDefisc");
