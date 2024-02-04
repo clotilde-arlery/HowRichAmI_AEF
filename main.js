@@ -120,7 +120,6 @@ function collapseNotes() {
 
 function expandNotes() {
     notesSection.removeAttribute("collapsed");
-    console.log(notesSection)
 }
 
 function collapseNotesIfNotInView() {
@@ -139,7 +138,6 @@ document.addEventListener('scroll', collapseNotesIfNotInView);
 
 footnoteLinks = document.querySelectorAll("a.footNote");
 for(i in footnoteLinks) {
-    console.log(footnoteLinks[i]);
     footnoteLinks[i].addEventListener('click', expandNotes);
 }
 
@@ -163,49 +161,54 @@ function formatNumber(x, roundToUnit=false){
 function getNParts(n_adults, n_children){
     let nParts;
     if (n_adults == 1){
-            if (n_children == 0){
-                nParts = 1;
-            }
-            else if (n_children == 1){
-                nParts = 1.5;
-            }
-            else if (n_children >= 2){
-                nParts = n_children;
-            }     
+        if (n_children == 0){
+            nParts = 1;
         }
-        else if (n_adults > 1){
-            if (n_children == 0){
-                nParts = 2;
-            }
-            else if (n_children == 1){
-                nParts = 2.5;
-            }
-            else if (n_children >= 2){
-                nParts = n_children + 1;
-            }
+        else if (n_children == 1){
+            nParts = 1.5;
         }
+        else if (n_children >= 2){
+            nParts = n_children;
+        }     
+    }
+    else if (n_adults >= 2){
+        n_children_over_14 = n_adults - 2;
+        n_children_all_ages = n_children + n_children_over_14;
+        if (n_children_all_ages == 0){
+            nParts = 2;
+        }
+        else if (n_children_all_ages == 1){
+            nParts = 2.5;
+        }
+        else if (n_children_all_ages >= 2){
+            nParts = n_children_all_ages + 1;
+        }
+    }
     return nParts;
 }
 
 
 function getTax(income, nParts){
     let tax;
-    let quotientFamilial = yearlyIncome / nParts;
+    let quotientFamilial = income / nParts;
 
-    if (income <= 10777){
+    if (quotientFamilial <= 10777){
             tax = 0;
         }
-        else if (income >= 10778 && income <= 27478){
-            tax = ((income - 10778)*0.11)*nParts;
+        else if (quotientFamilial >= 10778 && quotientFamilial <= 27478){
+            tax = ((quotientFamilial - 10778) * 0.11) * nParts;
         }
-        else if (income >= 27479 && income <= 78570){
-            tax = (16700*0.11 + (income - 27479)*0.3)*nParts;
+        else if (quotientFamilial >= 27479 && quotientFamilial <= 78570){
+            tax = (16700 * 0.11 + (quotientFamilial - 27479) * 0.3) * nParts;
         }
-        else if (income >= 78571 && income <= 168994){
-            tax = (16700*0.11 + 51091*0.3 + (income - 78571)*0.41)*nParts;
+        else if (quotientFamilial >= 78571 && quotientFamilial <= 168994){
+            tax = (16700*0.11 + 51091*0.3 + (quotientFamilial - 78571)*0.41)
+                  * nParts;
         }
-        else if (income > 168994){
-            tax = (16700*0.11 + 51091*0.3 + 90423*0.41 + (income - 168994)*0.45)*nParts;
+        else if (quotientFamilial > 168994){
+            tax = (16700 * 0.11 + 51091 * 0.3 + 90423 * 0.41
+                   + (quotientFamilial - 168994) * 0.45)
+                  * nParts;
         }
     return tax;
 }
