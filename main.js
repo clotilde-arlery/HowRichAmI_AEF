@@ -98,25 +98,18 @@ container_dropdownperiod.addEventListener("click", toggleDropdown);
 annuel_label.addEventListener("click", toggleDropdown);
 mensuel_label.addEventListener("click", toggleDropdown);
 
-/* Dropdown méthodo */
-var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    /* Toggle between adding and removing the "active" class,
-    to highlight the button that controls the panel */
-    
-
-    /* Toggle between hiding and showing the active panel */
-    var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
+/* Collapsable footnote section */
+function toggleCollapseNotes() {
+    var notes = document.querySelector("section.methodo > .panel");
+    if (notes.style.display === "block") {
+        notes.style.display = "none";
     } else {
-      panel.style.display = "block";
+        notes.style.display = "block";
     }
-  });
-} 
+}
+
+var toggleNotesButton = document.querySelector("button#toggleNotes");
+toggleNotesButton.addEventListener("click", toggleCollapseNotes);
 
 /* App secundary functions */
 function formatNumber(x, roundToUnit=false){

@@ -691,7 +691,7 @@ input[type="range"]:active::-moz-range-thumb {
 .methodo{
     padding: 50px;
 }
-.accordion {
+#toggleNotes {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -709,13 +709,7 @@ input[type="range"]:active::-moz-range-thumb {
   border-bottom: 1px solid #333;
 }
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-/* .active, .accordion:hover {
-  background-color: #ccc;
-} */
-
-/* Style the accordion panel. Note: hidden by default */
-.panel {
+section.methodo > .panel {
   padding: 0 18px;
   line-height: 1.5;
   text-align: justify;
