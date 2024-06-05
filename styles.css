@@ -50,7 +50,7 @@ body{
 .banner{
     color: #fff;
     /* width: 100%; */
-    padding: calc(60px + 91px) 0px 60px 0px;
+    padding: 60px 0px;
     text-align: center;
     background-color: var(--primary);
     font-size: 24px;
@@ -781,7 +781,7 @@ code{
             font-size: 16px;
         }
         .banner{
-            padding: calc(50px + 91px) 50px 50px 50px;
+            padding: 50px;
         }
 }
 @media (max-width: 900px){
@@ -819,7 +819,7 @@ code{
 @media (max-width: 720px){
         .banner{
             font-size: 18px;
-            padding: calc(50px + 91px) 15px 50px 15px;
+            padding: 50px 15px;
         }
         .range_input{
             width: 80%;
