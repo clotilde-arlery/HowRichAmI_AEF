@@ -351,8 +351,10 @@ function App(triggeringEvent){
     let income_position_bar = document.getElementById('income_position_bar');
     let graph_width = graph_container.clientWidth;
     let poorer_graph_width = document.getElementById('poorer_position');
-    income_position_bar.style.width = ((1 - percentile/100)*graph_width).toString()+"%";
-    //poorer_graph_width.style.width = 
+    income_position_bar.style.width = (pourcentage_position).toString()+"%";
+    poorer_graph_width.style.width = (100 - pourcentage_position).toString()+"%"; 
+    //console.log("taille de la barre perso : ", income_position_bar.style.width);
+    
     let revenuMedian = 6499.6;
     
     let timesRevenuMedian = ajusted_income/revenuMedian;
