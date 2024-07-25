@@ -379,7 +379,7 @@ form input:focus::placeholder {
 }
 .income_position_bar{
     position: relative;
-    width: 25%;
+    /*width: 25%;*/
     height: 100%;
     background-color: var(--primary-lighter);
     border-left: 3px dashed #000;
