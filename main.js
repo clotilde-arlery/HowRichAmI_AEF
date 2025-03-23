@@ -349,7 +349,6 @@ function App(triggeringEvent){
     }
     let graph_container = document.getElementById('graph_container');
     let income_position_bar = document.getElementById('income_position_bar');
-    let graph_width = graph_container.clientWidth;
     let poorer_graph_width = document.getElementById('poorer_position');
     income_position_bar.style.width = (pourcentage_position).toString()+"%";
     poorer_graph_width.style.width = (100 - pourcentage_position).toString()+"%"; 
@@ -431,6 +430,9 @@ function App(triggeringEvent){
     let income_position_barPD = document.getElementById('income_position_barPD');
     let graph_widthPD = graph_containerPD.clientWidth;
     income_position_barPD.style.width = ((1 - percentilePostDon/100)*graph_widthPD).toString()+"px";
+    
+    let poorer_graph_widthPD = document.getElementById('poorer_positionPD');
+    poorer_graph_widthPD.style.width = (100 - pourcentage_positionPD).toString()+"%"; 
 
     let txt_amountDon = document.getElementById("txt_amountDon");
     let txt_amountDonDefisc = document.getElementById("txt_amountDonDefisc");
