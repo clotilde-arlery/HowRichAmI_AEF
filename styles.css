@@ -10,12 +10,13 @@ html{
 /* global variables */
 body {
     /* Color variables */
-    --primary: #0C869B;
-    --primary-transparent: #0C869B7A;
+    --primary: #00829c;
+    --primary-hover: #078ca7;
+    --primary-halo: #00829c7A;
     --primary-lighter: #35b8be;
     
     --secondary: #FFB41A;
-    --secondary-transparent: #ffb31a7c;
+    --secondary-halo: #ffb31a7c;
 }
 
 /* Firefox */
@@ -139,7 +140,7 @@ input[type="button"]#calculer {
     border-radius: 35px;
     align-self: center;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px;
-    transition: opacity 0.3s;
+    transition: background-color .15s;
 }
 
 input[type="button"]#calculer:disabled {
@@ -148,7 +149,7 @@ input[type="button"]#calculer:disabled {
 }
 
 input[type="button"]#calculer:not(:disabled):hover {
-    opacity: 0.93;
+    background-color: var(--primary-hover);
 }
 
 /* Input revenu */
@@ -536,7 +537,7 @@ input[type="range"]::-webkit-slider-thumb {
    height: 20px;
    width: 20px;  
    border-radius: 100%;
-   --halo-color: var(--primary-transparent);
+   --halo-color: var(--primary-halo);
    box-shadow: 0px 0px 0px 3px var(--halo-color);
    cursor: grab;
    transition: box-shadow 0.2s;
@@ -548,7 +549,7 @@ input[type="range"]::-moz-range-thumb {
     background-color: var(--primary);
     height: 20px;
     width: 20px;
-    --halo-color: var(--primary-transparent);
+    --halo-color: var(--primary-halo);
     box-shadow: 0px 0px 0px 3px var(--halo-color);
     cursor: grab;
     transition: box-shadow 0.2s;
@@ -606,12 +607,12 @@ input[type="range"]:active::-moz-range-thumb {
 
 #postTaxSlider::-webkit-slider-thumb{
     background-color: var(--secondary);
-    --halo-color: var(--secondary-transparent);
+    --halo-color: var(--secondary-halo);
     position: -webkit-sticky;
 }
 #postTaxSlider::-moz-range-thumb{
     background-color: var(--secondary);
-    --halo-color: var(--secondary-transparent);
+    --halo-color: var(--secondary-halo);
     position: sticky;
     position: -webkit-sticky;
     initial-value: 10;
