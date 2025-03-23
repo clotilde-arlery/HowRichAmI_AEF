@@ -208,14 +208,13 @@ input[type="button"]#calculer:not(:disabled):hover {
   position: relative;
   background: #fff;
   border: 2px solid #767676;
-  padding: 0px 5px;
+  padding: 1px 5px;
+  margin-left: 5px;
   width: min-content;
   height: min-content;
   font-size: 12px;
   border-radius: 100%;
   color: #767676;
-  
-  
 }
 
 .tooltip:before,
@@ -223,9 +222,7 @@ input[type="button"]#calculer:not(:disabled):hover {
   position: absolute;
   content: "";
   opacity: 0;
-  transition: all 0.4s ease;
-  visibility: hidden;
-  scale: 0;
+  transition: opacity 0.4s ease;
   transform: translateX(-180px);
 }
 
@@ -236,6 +233,7 @@ input[type="button"]#calculer:not(:disabled):hover {
   border-color: #fff transparent transparent transparent;
   top: -15px;  
   z-index: 10;
+  transform: translate(-3px, -5px);
 }
 
 .tooltip:after {
@@ -245,47 +243,23 @@ input[type="button"]#calculer:not(:disabled):hover {
   width: 150px;  
   height: 100px;
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 400;
   top: -75px;
   left: -10px;
   padding: 15px;
   border-radius: 5px;
   letter-spacing: 1px;
-  
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transform: translate(-60px, -75px);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
 }
 
 .tooltip:hover::before {
   opacity: 1;
-  transform: translate(-3px, -5px);
-  visibility: visible;
-  scale: 1;
 }
 .tooltip:hover::after{
-    opacity: 1;
-    transform: translate(-60px, -75px);
-    font-weight: bold;
-    visibility: visible;
-    scale: 1;
+  opacity: 1;
 }
 
-@keyframes shake {
-  0% {
-    transform: rotate(2deg);
-  }
-  50% {
-    transform: rotate(-3deg);
-  }
-  70% {
-    transform: rotate(3deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-#anim:hover {
-  animation: shake 500ms ease-in-out forwards;
-}/*# sourceMappingURL=styles.css.map */ 
 
 form input {
     border-radius: 0px; /* Prevent iOS Safari default 5px border radius */
