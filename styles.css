@@ -139,7 +139,6 @@ input[type="button"]#calculer {
     padding: 7px 30px 7px 30px;
     border-radius: 35px;
     align-self: center;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px;
     transition: background-color .15s;
 }
 
@@ -692,7 +691,6 @@ input[type="range"]:active::-moz-range-thumb {
     padding: 7px 30px 7px 30px;
     border-radius: 35px;
     align-self: center;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px;
 }
 #notes{
     padding: 50px;
