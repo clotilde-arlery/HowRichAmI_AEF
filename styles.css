@@ -659,12 +659,17 @@ input[type="range"]:active::-moz-range-thumb {
     text-decoration: none;
     margin-top: 20px;
     background-color: var(--primary);
+    transition: background-color .15s;
     color: #fff;
     font-size: 18px;
     border-color: transparent;
     padding: 7px 30px 7px 30px;
     border-radius: 35px;
     align-self: center;
+    
+    &:hover {
+        background-color: var(--primary-hover);
+    }
 }
 #notes{
     padding: 50px;
